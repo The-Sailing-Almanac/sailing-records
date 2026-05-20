@@ -40,9 +40,6 @@ desktop.ini
 *.swp
 *.swo
 
-# Diagnostic samples
-diagnostic/
-
 # Log files
 *.log
 log.txt

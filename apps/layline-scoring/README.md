@@ -17,4 +17,8 @@ Our mission is to eliminate the pain of manual data entry, complicated spreadshe
 
 ### Documentation
 
-Please see the `/docs` directory for the foundational brainstorming, MVP scope, and product strategy.
+| Doc | Contents |
+|---|---|
+| [docs/product-brief.md](docs/product-brief.md) | MVP scope, target buyer, competitive landscape, GTM strategy |
+| [docs/roadmap.md](docs/roadmap.md) | 7-phase development roadmap with exit criteria per phase |
+| [docs/feature-parity.md](docs/feature-parity.md) | Mandatory feature checklist for market parity vs Sailwave / Regatta Network |

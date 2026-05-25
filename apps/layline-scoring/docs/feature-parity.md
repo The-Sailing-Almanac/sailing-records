@@ -2,7 +2,7 @@
 title: Yacht Scoring - Market Parity Feature Checklist
 type: specification
 status: active
-updated_at: "2026-05-25"
+updated_at: "2026-05-25T04:45:00Z"
 ---
 
 # Market Parity Feature Checklist
@@ -175,3 +175,46 @@ These are areas where Sailwave and Regatta Network are weakest — our different
 | Offline capability | Neither handles offline gracefully | PWA with sync — works in the harbor |
 | Cost for small clubs | RegNet: expensive + overkill | $30–80/mo, no features they won't use |
 | Series standings | Sailwave: static HTML export | Always-live public URL, no action required |
+
+---
+
+## Differentiators — Features No Competitor Offers
+
+These are original features that no current competitor provides at the club level. They are not required for parity but are the reason sailors will recommend the product to other clubs.
+
+### Race Day
+
+| Feature | Description | Roadmap Phase |
+|---|---|---|
+| Start sync | Single "gun" tap pushes start time to all connected devices in the same race session | Phase 3 |
+| Fleet check-in | Boats confirm racing before the start; committee boat gets alert for any checked-in boat that hasn't finished or withdrawn after time limit expires | Phase 3 |
+
+### Results & Standings
+
+| Feature | Description | Roadmap Phase |
+|---|---|---|
+| Comeback calculator | Live per-boat math on the standings page: exactly what results a boat needs across remaining races to win the series | Phase 4 |
+| Head-to-head comparison | Side-by-side corrected times and points for any two boats across a series, on the public results page | Phase 5 |
+
+### Analytics & Performance
+
+| Feature | Description | Roadmap Phase |
+|---|---|---|
+| Rating trajectory | Per-boat chart of corrected performance vs PHRF rating over a full season — visual evidence of whether the rating is accurate | Phase 7 |
+| Sandbagger detector | Flags boats whose corrected times consistently outperform their rating beyond a configurable threshold; visible to Club Admin only; data for PHRF appeals | Phase 7 |
+
+### Engagement & Retention
+
+| Feature | Description | Roadmap Phase |
+|---|---|---|
+| Achievement badges | Podium finish, clean series (raced every race), series winner, 10 races sailed | Phase 7 |
+| Season recap card | Auto-generated end-of-season summary per boat: best finish, wins, most improved; shareable image link | Phase 7 |
+
+### Club Operations
+
+| Feature | Description | Roadmap Phase |
+|---|---|---|
+| Digital notice board | NOR, sailing instructions, amendments, and race day updates in one shareable club URL — replaces email chains and physical bulletin boards | Phase 6 |
+| One-off regatta mode | Distinct product path for single-day or multi-day invitational events; supports visiting boats without requiring club membership | Phase 6 |
+| PHRF cert sync | Pull ratings from the national PHRF database to auto-populate boat records — eliminates the dock argument | Phase 6 |
+| Weather stamping | NOAA wind/conditions attached to each race record at time of scoring (display only, no scoring impact) | Phase 7 |

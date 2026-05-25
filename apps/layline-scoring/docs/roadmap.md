@@ -2,7 +2,7 @@
 title: Yacht Scoring - Development Roadmap
 type: roadmap
 status: active
-updated_at: "2026-05-25"
+updated_at: "2026-05-25T04:45:00Z"
 ---
 
 # Yacht Scoring: Development Roadmap
@@ -44,6 +44,8 @@ This roadmap sequences the build from data model through GTM launch. Each phase 
 
 - [ ] Race creation within a series (race number, course type, distance if ToD)
 - [ ] Start time recording (tap to stamp, manual entry fallback)
+- [ ] Start sync: single "gun" tap broadcasts start time to all connected devices in the same race session
+- [ ] Fleet check-in: boats mark themselves as racing before the start; committee boat sees live check-in list and is alerted to any checked-in boat that hasn't finished or withdrawn after time limit
 - [ ] Finish line interface: scrollable entry list, tap to record finish order + time
 - [ ] Elapsed time entry as alternative to finish time stamp
 - [ ] Penalty / status codes per boat: DNF, DNS, DNC, OCS, BFD, DSQ, RET, RAF, TLE, ZFP, SCP
@@ -65,6 +67,7 @@ This roadmap sequences the build from data model through GTM launch. Each phase 
 - [ ] Tiebreaker logic (RRS Appendix A: last race, head-to-head, etc.)
 - [ ] Per-race results: corrected times, positions, points
 - [ ] Series standings: cumulative points, throwouts highlighted
+- [ ] Comeback calculator: live "what does [boat] need to win the series?" math on the standings page
 - [ ] Protest / redress placeholder (mark as pending, manual override)
 - [ ] Scoring audit log (who changed what, when)
 
@@ -81,6 +84,7 @@ This roadmap sequences the build from data model through GTM launch. Each phase 
 - [ ] Fleet selector if multiple fleets in same series
 - [ ] Mobile-optimized results layout
 - [ ] Series history page (all races, all results, per boat performance)
+- [ ] Head-to-head comparison: side-by-side corrected times for any two boats across a series
 - [ ] CSV export for race and series results (backup/archival)
 - [ ] Optional PDF export of official results sheet
 
@@ -92,11 +96,15 @@ This roadmap sequences the build from data model through GTM launch. Each phase 
 **Goal:** Everything a club needs to run a full season without calling support.
 
 - [ ] Multi-series management (e.g., Spring Series, Fall Series, Wednesday Night)
+- [ ] One-off regatta mode: single-day or multi-day event path distinct from weekly series, supports visiting boats without club membership
+- [ ] Visiting boat handling: non-member boats can enter a regatta or guest race without a full club account
+- [ ] Digital notice board: NOR, sailing instructions, amendments, and race day updates in one shareable club URL
 - [ ] Race calendar view
 - [ ] Bulk boat import (CSV upload from prior season)
 - [ ] Club branding (logo, club name on results pages)
 - [ ] Email notifications: results posted, standings updated (opt-in)
 - [ ] Sailor profile (optional: self-service PHRF cert update requests)
+- [ ] PHRF certificate sync: pull from national PHRF database to auto-populate boat ratings
 - [ ] Archival: prior season results remain accessible
 - [ ] Club admin: manage users, assign roles, reset passwords
 
@@ -104,7 +112,20 @@ This roadmap sequences the build from data model through GTM launch. Each phase 
 
 ---
 
-## Phase 7: GTM Launch
+## Phase 7: Analytics & Engagement
+**Goal:** Features that keep sailors coming back and give fleet directors ammunition for PHRF appeals.
+
+- [ ] Rating trajectory: per-boat chart of corrected performance vs PHRF rating over a season
+- [ ] Sandbagger detector: flag boats whose corrected times consistently outperform their rating by a configurable threshold; surfaced to Club Admin only
+- [ ] Achievement badges: podium finish, clean series (raced every race), 10 races sailed, series winner
+- [ ] Season recap card: auto-generated end-of-season summary per boat (best finish, most improved, wins); shareable image link
+- [ ] Weather stamping: pull NOAA wind/conditions at race time and attach to race record (display only, no scoring impact)
+
+**Exit criteria:** A fleet director can pull up a boat's rating trajectory and sandbagger flag status in under 30 seconds.
+
+---
+
+## Phase 8: GTM Launch
 **Goal:** Two anchor clubs on Gulf Coast using it live before paid launch.
 
 - [ ] Free pilot tier (1 active series, unlimited races, no payment required)
@@ -125,5 +146,5 @@ This roadmap sequences the build from data model through GTM launch. Each phase 
 - Offshore / ocean racing course types
 - Native mobile app (iOS/Android)
 - Protest committee workflow
-- PHRF certificate sync with national database
 - Multi-club regatta hosting (invitational events)
+- Live GPS tracking integration (AIS or tracker overlay on course map)

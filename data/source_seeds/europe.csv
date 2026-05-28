@@ -1,0 +1,8 @@
+platform,country,language_hint,url,notes
+Sailwave,GB,en,https://www.sailwave.com/results/,Published Sailwave results index; use for discovery and static HTML parser samples.
+Sailwave,GB,en,https://www.sailwave.com/results/SBSCEuropeNationals2025.htm,Example static Sailwave result page for Europe class nationals.
+Sailwave,GB,en,https://www.sailwave.com/results/hisc/2023-europe.htm,Example static Sailwave result page from Hayling Island Sailing Club.
+manage2sail,EU,multi,https://www.manage2sail.com/,International regatta platform; seed event pages manually before broad harvesting.
+manage2sail,FI,en,https://hangoregattan.fi/en/results/,Example event site linking to manage2sail results.
+RegattaBase,DE,de,https://regattabase.com/,German-speaking regatta/sailor/club index; start as discovery source.
+SailingResults.net,EU,en,https://sailingresults.net/,International sailing result and entry platform candidate.

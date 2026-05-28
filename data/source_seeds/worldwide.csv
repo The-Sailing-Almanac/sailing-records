@@ -1,0 +1,20 @@
+platform,country,language_hint,url,notes
+Sailwave,GLOBAL,multi,https://www.sailwave.com/results/,Global published Sailwave results index; use as discovery source.
+Sailwave,AU,en,https://www.sailwave.com/results/WLBC/WLBC%20Regatta%202025%20Working.htm,Australia static Sailwave result page from Wallagoot Lake Boat Club.
+Sailwave,NZ,en,https://www.sailwave.com/results/NZPaperTiger/2024%20Whanganui%20Regatta.htm,New Zealand Paper Tiger static Sailwave result page.
+Sailwave,NZ,en,https://www.sailwave.com/results/NZPaperTiger/2025%20International%20Paper%20Tiger%20Championships%20OVERALL.htm,New Zealand-hosted international Paper Tiger championship static Sailwave result page.
+Sailwave,NZ,en,https://www.sailwave.com/results/npcl/Noelex_25_2025%20Nationals_Final_Results.htm,New Zealand Noelex 25 National Championships static Sailwave result page.
+Sailwave,NZ,en,https://www.sailwave.com/results/wbc/mmts-2025.htm,New Zealand Marlborough Sounds twilight series static Sailwave result page.
+Sailwave,AU,en,https://www.sailwave.com/results/20251026-TasarNSW-MT1-Sprints-GRSC.htm,Australia Tasar NSW static Sailwave result page from global index.
+Sailwave,AU,en,https://www.sailwave.com/results/20251122-Tasar%20NSW%2050th%20Anniversary-Fun%20Sprints-NSC.htm,Australia Tasar NSW anniversary static Sailwave result page from global index.
+Sailwave,AU,en,https://www.sailwave.com/results/Australia%202025%20Raceboard%20Nationals%20Results%20Overall.htm,Australia Raceboard Nationals static Sailwave result page.
+Sailwave,TW,zh,https://www.sailwave.com/results/104_Yilan_County_Games.htm,Taiwan Yilan County Games static Sailwave result page from global index.
+Sailwave,BR,pt,https://www.sailwave.com/results/wingfoilBRAg1.htm,Brazil wingfoil static Sailwave result page from global index.
+Sailwave,AE,en,https://www.sailwave.com/results/SB20%20ME%20%26%20UAE%20National%20Championships%202025.htm,UAE SB20 Middle East and UAE National Championships static Sailwave result page.
+Sailwave,MY,en,https://s3.amazonaws.com/rrs.prod/ni0znhlglozh3zvr90fje7i2hbk9?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJH37WFGGNKRSBH6Q%2F20260518%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260518T171937Z&X-Amz-Expires=604800&X-Amz-Signature=8bd67f74c65f4b5c041550689aba55908ea022caffc0ec2b73fb6666a4c69373&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B+filename%3D%22OPTIMIST+NOVICE+OVERALL+-+PROVISIONAL+RESULTS+AS+OF+14.02.2026.pdf%22%3B+filename%2A%3DUTF-8%27%27OPTIMIST%2520NOVICE%2520OVERALL%2520-%2520PROVISIONAL%2520RESULTS%2520AS%2520OF%252014.02.2026.pdf&response-content-type=application%2Fpdf,Malaysia Sailwave PDF result example; preserve raw now and parse after PDF support.
+Sailwave,ZA,en,https://rcyc.co.za/wp/wp-content/uploads/2020/02/Fling-Regatta-2020-Results-05-for-ORC-2.pdf,South Africa Sailwave PDF result example; preserve raw now and parse after PDF support.
+Sailwave,ZA,en,https://www.rcyc.co.za/images/2014_RESULTS/Race_2__Overall.pdf,South Africa historical Sailwave PDF result example; preserve raw now and parse after PDF support.
+Topyacht,AU,en,https://topyacht.com.au/,Australia race management/results provider; candidate source, not supported yet.
+SailSys,AU,en,https://www.sailsys.com.au/,Australia race management/results provider; candidate source, not supported yet.
+SailingResults,AU,en,https://sailingresults.net/,International/Australia result platform candidate, not supported yet.
+SailingSA,ZA,en,https://sailingsa.co.za/,South African sailing result portal candidate, not supported yet.

@@ -114,3 +114,102 @@ and any known limitations or ethical considerations.
 - All source data is publicly accessible without login.
 - Raw files are preserved locally and gitignored. They are not redistributed.
 - If a source platform changes its access policy or requests removal, stop harvesting and document that decision here.
+
+---
+
+## International Expansion Candidates
+
+The next source expansion is international, with Europe first. See
+[international.md](international.md) for the multilingual ingestion rules and
+development order.
+
+### manage2sail
+
+**URL:** https://www.manage2sail.com  
+**Type:** International regatta management and results platform  
+**Initial role:** European championship and class-event source  
+**Raw storage target:** `raw_intl/manage2sail/`  
+**Status:** Candidate source; no harvester/parser yet
+
+**Notes:**
+- Public event pages and downloadable result reports are common.
+- Reports may be HTML or PDF; preserve originals before extraction.
+- Source wording and formatting must remain intact because event names, club
+  names, and report labels may be multilingual.
+
+### Sailwave published results
+
+**URL:** https://www.sailwave.com/results  
+**Type:** Published static results from Sailwave scoring software  
+**Initial role:** First international parser target  
+**Raw storage target:** `raw_intl/sailwave/`  
+**Harvester:** `ingestion/sailwave_harvester.py`  
+**Parser:** `ingestion/sailwave_parser.py`  
+**Status:** Seeded first-pass support
+
+**Notes:**
+- Many result pages are static HTML with table-based results.
+- Used internationally at club, national, and championship levels.
+- Parser should preserve original table headers and race-cell text before
+  mapping columns to canonical fields.
+
+### RegattaBase
+
+**URL:** https://regattabase.com  
+**Type:** German-speaking sailing regatta, club, and sailor index  
+**Initial role:** European discovery/index source  
+**Raw storage target:** `raw_intl/regattabase/`  
+**Status:** Candidate source; no harvester/parser yet
+
+**Notes:**
+- Strong candidate for Germany/Austria/Switzerland coverage.
+- German labels and names should be stored exactly as published.
+- Use initially for discovery and source linking before broad parsing.
+
+### SailingResults.net
+
+**URL:** https://sailingresults.net  
+**Type:** Regatta entry and result platform  
+**Initial role:** Secondary international platform candidate  
+**Raw storage target:** `raw_intl/sailingresults/`  
+**Status:** Candidate source; no harvester/parser yet
+
+**Notes:**
+- Evaluate source structure and access policy with seeded public result pages
+  before writing a broad harvester.
+
+### Topyacht
+
+**URL:** https://topyacht.com.au  
+**Type:** Australian race management and results software  
+**Initial role:** Australia/New Zealand expansion candidate  
+**Raw storage target:** `raw_intl/topyacht/`  
+**Status:** Candidate source; no harvester/parser yet
+
+**Notes:**
+- Australian Sailing lists Topyacht as a major Australian race-management
+  provider.
+- Evaluate public result URL patterns before broad harvesting.
+
+### SailSys
+
+**URL:** https://www.sailsys.com.au  
+**Type:** Australian race-management and club results platform  
+**Initial role:** Australia expansion candidate  
+**Raw storage target:** `raw_intl/sailsys/`  
+**Status:** Candidate source; no harvester/parser yet
+
+**Notes:**
+- Australian Sailing identifies SailSys as a competition-management option.
+- Start from seeded public event pages only.
+
+### Sailing South Africa
+
+**URL:** https://sailingsa.co.za  
+**Type:** South African sailing portal and results index  
+**Initial role:** Southern Africa discovery source  
+**Raw storage target:** `raw_intl/sailing_sa/`  
+**Status:** Candidate source; no harvester/parser yet
+
+**Notes:**
+- Use initially as a discovery/index source for official public result links.

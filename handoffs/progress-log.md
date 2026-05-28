@@ -4,6 +4,83 @@ Running record of completed work batches. Most recent first.
 
 ---
 
+## 2026-05-27 — International Source Planning and Sailwave First Pass
+
+**Goal:** Refresh the repo and define the European/international expansion path
+without risking source-language data loss.
+
+**Work completed:**
+- Confirmed local `master` is up to date with `origin/master`
+- Added `docs/international.md` with multilingual ingestion rules
+- Added `raw_intl/` as the planned gitignored raw storage root for non-US sources
+- Documented initial European candidates: manage2sail, Sailwave published
+  results, RegattaBase, and SailingResults.net
+- Added `data/source_seeds/europe.csv` with curated starting URLs
+- Added `data/source_seeds/worldwide.csv` with Australia, New Zealand,
+  Malaysia, South Africa, and global platform candidates
+- Added `ingestion/sailwave_harvester.py` for seeded static Sailwave pages
+- Added `ingestion/sailwave_parser.py`, which loads saved Sailwave pages into
+  `sailing_data.db` and writes original headers/cell text to `source_text`
+- Updated pipeline/schema docs to require original source wording, labels,
+  formatting, and raw files to be preserved before any translation or
+  normalization
+- Harvested eight Sailwave seed URLs: one index, four HTML result pages, two
+  South Africa PDF result files, and one expired/forbidden signed Malaysia URL
+- Parsed four HTML result pages into local data: 4 regattas across GB/AU/NZ,
+  133 participation rows, 1,656 race-result rows, and 8,729 source-text
+  provenance rows
+- Added merge-only ops helpers: `ops/merge_sailwave_data.py` and
+  `ops/merge_sailwave_urls.py`
+- Merged the Sailwave layer into the authoritative `chantecler-01` DBs without
+  changing existing YachtScoring, ICSA, Regatta Network, or Clubspot counts
+- Created remote backups before upload:
+  `sailing_data.db.bak_sailwave_20260528_041011` and
+  `sailing_urls.db.bak_sailwave_20260528_041011`
+- Uploaded preserved `raw_intl/sailwave/` source artifacts to the authoritative
+  server
+- Expanded worldwide Sailwave seeds with additional Australia, New Zealand,
+  Taiwan, Brazil, and UAE candidates
+- Parsed the expanded static HTML set into 8 Sailwave regattas across GB, AU,
+  NZ, Taiwan, and Brazil, with 275 participation rows, 3,206 race-result rows,
+  and 14,247 source-text provenance rows
+- Updated the authoritative server again using the merge-only path; existing
+  non-Sailwave platform counts remained unchanged
+- Created second remote backup set before the expanded upload:
+  `sailing_data.db.bak_sailwave_20260528_041917` and
+  `sailing_urls.db.bak_sailwave_20260528_041917`
+- Verified `raw_intl/sailwave/` on the authoritative server contains 32 files
+- Hardened Sailwave table detection so all 13 saved HTML result pages now parse
+  (only the global index remains `no_entries`)
+- Added conservative Sailwave PDF parsing via `pypdf`; two South Africa PDFs now
+  create boat/race-result rows while preserving extracted PDF text in
+  `source_text`
+- Added `analysis/link_sailwave_aliases.py` for exact name+club Sailwave alias
+  linking without rebuilding the existing alias table
+- Final authoritative verification: 15 Sailwave regattas across AE/AU/BR/GB/NZ/TW/ZA,
+  380 participation rows, 4,532 race-result rows, 19,013 source-text rows, and
+  19 distinct Sailwave sailor aliases on the server
+- Created third remote backup set before the final upload:
+  `sailing_data.db.bak_sailwave_20260528_170149` and
+  `sailing_urls.db.bak_sailwave_20260528_170149`
+
+**Decisions made:**
+- Europe is the first international priority, but the storage and parser rules
+  apply globally
+- Sailwave static HTML is the best first parser target because it is commonly
+  published as preservable result pages
+- manage2sail is the best high-value championship/event target, but should
+  begin from seeded public URLs and preserved reports
+- Translation metadata should be derived and traceable; it must not overwrite
+  source-language fields or raw files
+- `source_text` is the first implemented provenance table; translated display
+  fields should wait until multilingual parser behavior is better understood
+
+**Recommended next batch:** Add 25-50 more static HTML Sailwave result pages
+across Australia, New Zealand, South Africa, Asia, Europe, and South America;
+then add PDF extraction support for preserved Sailwave PDF result files.
+
+---
+
 ## 2026-05-20 — Batch 2: Server Data Setup & Ops Layer
 
 **Goal:** Move authoritative data to chantecler-01; establish rsync-based sync workflow; document ops layer in repo.

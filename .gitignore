@@ -9,9 +9,13 @@
 raw/
 raw_icsa/
 raw_rn/
+raw_intl/
 
 # Backups
 Claude Sailing Records Backups/
+.remote_merge/
+sailing_data_merge_test.db
+sailing_urls_merge_test.db
 
 # Python
 __pycache__/

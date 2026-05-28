@@ -3,6 +3,11 @@
 Primary database: `sailing_data.db` (SQLite, local only, gitignored)  
 URL registry: `sailing_urls.db` (SQLite, local only, gitignored)
 
+International and multilingual parsers must preserve original source files in
+`raw_intl/` and avoid replacing source-language names, labels, or result text
+with translations. The first provenance table, `source_text`, is created by the
+Sailwave parser.
+
 ---
 
 ## sailing_data.db
@@ -151,6 +156,48 @@ Maps duplicate sailor records to canonical identities. Enables cross-platform de
 | `canonical_id` | INTEGER | FK → sailors.id (the kept record) |
 
 **Note:** Cross-platform alias linking (same sailor in YachtScoring + Regatta Network + Clubspot) is not yet implemented. The table structure is ready.
+
+---
+
+## Translation / Source Text Tables
+
+Do not retrofit translations by overwriting canonical fields. When multilingual
+sources are implemented, use explicit translation/source-text support.
+
+### `source_text`
+
+Stores exact source-language labels or text snippets that were mapped into
+canonical fields. Created by `ingestion/sailwave_parser.py`.
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | INTEGER PK | |
+| `entity_type` | TEXT | `regatta`, `boat`, `sailor`, `participation`, `race_result`, `source_column` |
+| `entity_id` | INTEGER | ID in the corresponding table, nullable for source-only labels |
+| `platform` | TEXT | Source platform |
+| `source_url` | TEXT | Original URL |
+| `source_language` | TEXT | BCP 47 code when known, e.g. `de`, `fr`, `it`, `es` |
+| `field_name` | TEXT | Canonical field or parser mapping target |
+| `source_text` | TEXT | Exact source wording |
+| `source_context` | TEXT | Header, cell, title, caption, PDF line, etc. |
+| `parsed_at` | TEXT | |
+
+### `translations`
+
+Stores derived translations for search/display while preserving provenance.
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | INTEGER PK | |
+| `source_text_id` | INTEGER | FK -> `source_text.id` |
+| `target_language` | TEXT | Usually `en` |
+| `translated_text` | TEXT | Derived translation |
+| `translation_method` | TEXT | Human, model, dictionary, parser rule |
+| `confidence` | REAL | Nullable |
+| `created_at` | TEXT | |
+
+This table is intentionally not implemented yet; add it only when translated
+display/search fields are needed.
 
 ---
 

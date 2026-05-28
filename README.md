@@ -13,8 +13,12 @@
 
 A sailing records and sailing intelligence system — the SABR of competitive sailing.
 
-Ingests, normalizes, links, and analyzes racing history across four platforms:
-YachtScoring, ICSA Techscore, Regatta Network, and Clubspot.
+Ingests, normalizes, links, and analyzes racing history across four current
+platforms: YachtScoring, ICSA Techscore, Regatta Network, and Clubspot.
+
+The next expansion track is international and multilingual, with Europe first.
+Candidate sources include manage2sail, Sailwave published results, RegattaBase,
+and SailingResults.net. See [docs/international.md](docs/international.md).
 
 ## What this is
 
@@ -35,6 +39,7 @@ handoffs/    project manager handoff documents and progress logs
 raw/         YachtScoring raw JSON (gitignored, local only)
 raw_icsa/    ICSA Techscore raw HTML (gitignored, local only)
 raw_rn/      Regatta Network raw HTML (gitignored, local only)
+raw_intl/    International raw source files (gitignored, local only)
 diagnostic/  raw HTML specimens for parser development reference
 ```
 
@@ -50,6 +55,7 @@ diagnostic/  raw HTML specimens for parser development reference
 - [Pipeline overview](docs/pipeline.md)
 - [Schema reference](docs/schema.md)
 - [Data sources and provenance](docs/sources.md)
+- [International and multilingual expansion](docs/international.md)
 - [Current handoff / project state](handoffs/HANDOFF-2026-05-18.md)
 
 ## Running the pipeline
@@ -60,9 +66,11 @@ All scripts are run from the project root:
 python ingestion/icsa_harvester.py
 python ingestion/rn_harvester.py
 python ingestion/cs_harvester.py
+python ingestion/sailwave_harvester.py
 python ingestion/icsa_parser.py
 python ingestion/rn_parser.py
 python ingestion/parser.py
+python ingestion/sailwave_parser.py
 python analysis/detect_families.py
 ```
 

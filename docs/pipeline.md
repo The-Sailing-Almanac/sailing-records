@@ -32,6 +32,8 @@ All scripts run from the project root. Raw data directories and databases are lo
 | ICSA Techscore | `icsa_harvester.py` | `icsa_parser.py` | Working |
 | Regatta Network | `rn_harvester.py` | `rn_parser.py` | Working |
 | Clubspot | `cs_harvester.py` | **missing** | Harvest only — parser not yet built |
+| Sailwave | `sailwave_harvester.py` | `sailwave_parser.py` | Seeded international parser, first pass |
+| International / Europe | seeded candidates | planned | manage2sail, RegattaBase, SailingResults.net not yet implemented |
 
 **Critical gap:** Clubspot data is harvested but `cs_parser.py` does not exist. No Clubspot records are currently in `sailing_data.db`. Building `cs_parser.py` is the top pipeline priority.
 
@@ -119,6 +121,39 @@ All scripts run from the project root. Raw data directories and databases are lo
 
 ---
 
+## International / Multilingual Track
+
+International expansion is documented in `docs/international.md`. Europe is the
+first priority, with `manage2sail`, Sailwave published results, RegattaBase, and
+SailingResults.net identified as candidate sources.
+
+Critical ingestion rule: original source-language files, labels, table headers,
+and result-cell text must be preserved exactly as fetched. Translations and
+English-normalized labels are derived metadata only and must never replace the
+saved source wording.
+
+Recommended first implementation:
+
+```bash
+# 1. Seed public European result URLs manually
+#    data/source_seeds/europe.csv and data/source_seeds/worldwide.csv
+
+# 2. Harvest seeded Sailwave HTML/PDF sources into raw_intl/sailwave/
+python ingestion/sailwave_harvester.py
+
+# 3. Parse static Sailwave HTML while preserving original headers/cells
+python ingestion/sailwave_parser.py
+
+# Use the bundled runtime when parsing preserved Sailwave PDFs, because it
+# includes pypdf:
+# C:\Users\aewoo\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe ingestion\sailwave_parser.py
+
+# 4. Link exact Sailwave sailor identities to existing platforms
+python analysis/link_sailwave_aliases.py
+```
+
+---
+
 ## Recommended Run Order (from scratch)
 
 ```bash
@@ -148,3 +183,5 @@ python analysis/detect_families.py
 - **No cross-platform sailor linking** — `sailor_alias` table is ready; matching logic not built
 - **ICSA coverage** — confirm `raw_icsa/` seasons are complete from f08 through present
 - **Regatta Network upper bound** — `rn_harvester.py` was configured to ~32,000; confirm whether higher IDs now exist
+- **International coverage** — European source expansion is not implemented yet; start with static Sailwave results and seeded manage2sail events
+- **Translations** — no translation metadata schema exists yet; preserve raw source files and defer schema changes until two multilingual parsers prove the needed fields

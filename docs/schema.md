@@ -201,6 +201,98 @@ display/search fields are needed.
 
 ---
 
+## Future Sailing Almanac Tables
+
+The `sailing-almanac` product needs trophy and club-history tables layered on
+top of the existing evidence database. See `docs/sailing-almanac.md` for the
+product/data model.
+
+Candidate tables:
+
+### `clubs`
+
+Canonical clubs and organizing authorities.
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | INTEGER PK | |
+| `club_name` | TEXT | Original/display name |
+| `club_name_normalized` | TEXT | Search/dedupe helper |
+| `city` | TEXT | |
+| `state_region` | TEXT | State/province/region |
+| `country` | TEXT | |
+| `website_url` | TEXT | |
+| `source_url` | TEXT | |
+| `verified_status` | TEXT | `unverified`, `submitted`, `verified`, `conflict` |
+
+### `trophies`
+
+Perpetual trophies, annual awards, class trophies, and other club honors.
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | INTEGER PK | |
+| `club_id` | INTEGER | FK -> `clubs.id` |
+| `trophy_name` | TEXT | Original/display name |
+| `trophy_name_normalized` | TEXT | Search/dedupe helper |
+| `award_type` | TEXT | `perpetual`, `annual`, `series`, `class`, etc. |
+| `class_name` | TEXT | Nullable |
+| `division_name` | TEXT | Nullable |
+| `first_awarded_year` | INTEGER | Nullable |
+| `description` | TEXT | |
+| `rules_or_eligibility` | TEXT | |
+| `source_url` | TEXT | |
+| `verified_status` | TEXT | |
+
+### `trophy_awards`
+
+One annual/seasonal award instance. Multiple rows may exist for co-winners,
+crew, divisions, or disputed records.
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | INTEGER PK | |
+| `trophy_id` | INTEGER | FK -> `trophies.id` |
+| `award_year` | INTEGER | |
+| `season_label` | TEXT | Nullable |
+| `regatta_id` | INTEGER | FK -> `regattas.id`, nullable |
+| `boat_id` | INTEGER | FK -> `boats.id`, nullable |
+| `sailor_id` | INTEGER | FK -> `sailors.id`, nullable |
+| `winning_entry_name` | TEXT | Original/source wording |
+| `winning_club` | TEXT | Original/source wording |
+| `class_name` | TEXT | |
+| `division_name` | TEXT | |
+| `placement` | INTEGER | Usually `1`, nullable for committee awards |
+| `points_or_score` | TEXT | Preserve source format |
+| `result_status` | TEXT | `verified`, `submitted`, `conflict`, etc. |
+| `source_url` | TEXT | |
+| `source_text_id` | INTEGER | FK -> `source_text.id`, nullable |
+| `confidence` | TEXT | |
+| `notes` | TEXT | |
+
+### `trophy_media`
+
+Metadata for trophy photos, engravings, PDFs, archive clippings, and 3D scans.
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | INTEGER PK | |
+| `trophy_id` | INTEGER | FK -> `trophies.id` |
+| `trophy_award_id` | INTEGER | FK -> `trophy_awards.id`, nullable |
+| `media_type` | TEXT | `photo`, `engraving`, `3d_scan`, `pdf`, etc. |
+| `storage_uri` | TEXT | Asset path or URL |
+| `thumbnail_uri` | TEXT | Nullable |
+| `caption` | TEXT | |
+| `creator` | TEXT | |
+| `captured_at` | TEXT | |
+| `rights_status` | TEXT | |
+| `source_url` | TEXT | |
+
+These tables are intentionally documented first; implement them once the first
+pilot club/trophy intake is selected.
+
+---
+
 ### `parsed_events`
 
 Audit trail for parsed events.

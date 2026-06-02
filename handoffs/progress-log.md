@@ -4,6 +4,41 @@ Running record of completed work batches. Most recent first.
 
 ---
 
+## 2026-06-02 — Sailing Almanac Product Pivot
+
+**Goal:** Reframe `sailing-records` as the evidence database for the
+`sailing-almanac` property, with a stronger focus on annual trophies,
+perpetual awards, club history, and virtual trophy rooms.
+
+**Work completed:**
+- Added `docs/sailing-almanac.md` with the product direction and almanac data
+  model
+- Documented candidate almanac entities: clubs, trophies, trophy awards, and
+  trophy media
+- Updated `docs/schema.md` with future trophy/almanac tables
+- Updated `README.md` to include almanac exports as a product-facing output
+- Added `schema/almanac_trophy_schema.sql` as reference DDL for a pilot trophy
+  database
+- Added `data/trophy_intake/perpetual_trophy_template.csv` as the first club
+  trophy-history intake format
+
+**Decisions made:**
+- `sailing-records` remains the source/evidence engine; `sailing-almanac`
+  should consume curated exports rather than depend directly on raw harvesting
+  internals
+- Trophy history must be modeled explicitly because annual awards are not always
+  equivalent to regatta overall winners
+- Original club wording, trophy names, inscriptions, and result source text must
+  be preserved for citation and correction
+- Trophy media, including future 3D scans, should be represented by metadata and
+  storage URIs rather than stored inside SQLite
+
+**Recommended next batch:** Create `analysis/export_almanac.py`, pick one pilot
+club, and model 3-5 perpetual trophies manually against existing regatta/boat/
+sailor evidence.
+
+---
+
 ## 2026-05-27 — International Source Planning and Sailwave First Pass
 
 **Goal:** Refresh the repo and define the European/international expansion path

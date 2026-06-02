@@ -25,6 +25,11 @@ and SailingResults.net. See [docs/international.md](docs/international.md).
 A local-first research and data product. Not a scoring SaaS. The goal is historically interesting, analytically useful, explainable records and findings about competitive sailing.
 
 Output layers: **query tool** · **visualizations** · **reports and findings**
+· **sailing-almanac exports**
+
+The next product-facing use case is the `sailing-almanac` project: club history,
+annual trophies, perpetual awards, and virtual trophy rooms backed by verified
+result evidence from this database.
 
 ## Repo layout
 
@@ -56,6 +61,7 @@ diagnostic/  raw HTML specimens for parser development reference
 - [Schema reference](docs/schema.md)
 - [Data sources and provenance](docs/sources.md)
 - [International and multilingual expansion](docs/international.md)
+- [Sailing Almanac foundation](docs/sailing-almanac.md)
 - [Current handoff / project state](handoffs/HANDOFF-2026-05-18.md)
 
 ## Running the pipeline

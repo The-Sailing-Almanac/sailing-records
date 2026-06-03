@@ -17,6 +17,9 @@ Claude Sailing Records Backups/
 sailing_data_merge_test.db
 sailing_urls_merge_test.db
 
+# Generated exports
+exports/
+
 # Python
 __pycache__/
 *.py[cod]

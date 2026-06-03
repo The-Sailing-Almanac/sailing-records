@@ -21,6 +21,12 @@ perpetual awards, club history, and virtual trophy rooms.
   database
 - Added `data/trophy_intake/perpetual_trophy_template.csv` as the first club
   trophy-history intake format
+- Added `analysis/export_almanac.py` to generate the first JSONL knowledge
+  block for the `sailing-almanac` repo
+- Verified the exporter against local `sailing_data.db`; generated
+  `exports/almanac/` with 43,282 regattas, 399,978 boats, 299,555 sailors,
+  60,386 derived clubs, 212,622 result entries, 24,656 annual award candidates,
+  and 19,013 source/provenance rows
 
 **Decisions made:**
 - `sailing-records` remains the source/evidence engine; `sailing-almanac`
@@ -33,9 +39,9 @@ perpetual awards, club history, and virtual trophy rooms.
 - Trophy media, including future 3D scans, should be represented by metadata and
   storage URIs rather than stored inside SQLite
 
-**Recommended next batch:** Create `analysis/export_almanac.py`, pick one pilot
-club, and model 3-5 perpetual trophies manually against existing regatta/boat/
-sailor evidence.
+**Recommended next batch:** Hand the generated `exports/almanac/` bundle to the
+`sailing-almanac` repo, pick one pilot club, and model 3-5 perpetual trophies
+manually against existing regatta/boat/sailor evidence.
 
 ---
 

@@ -78,6 +78,7 @@ python ingestion/rn_parser.py
 python ingestion/parser.py
 python ingestion/sailwave_parser.py
 python analysis/detect_families.py
+python analysis/export_almanac.py
 ```
 
 See [docs/pipeline.md](docs/pipeline.md) for sequencing, resume behavior, and current gaps.

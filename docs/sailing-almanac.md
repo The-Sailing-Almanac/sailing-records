@@ -155,10 +155,24 @@ exports/almanac/
   boats.jsonl
   sailors.jsonl
   sources.jsonl
+  result_entries.jsonl
+  annual_award_candidates.jsonl
+  manifest.json
 ```
 
 Each export row should include stable IDs, source URLs, and enough provenance for
 `sailing-almanac` to cite where a winner came from.
+
+Generate the first bundle with:
+
+```bash
+python analysis/export_almanac.py
+```
+
+Generated export files are written under `exports/almanac/` and are gitignored.
+`annual_award_candidates.jsonl` contains inferred winners based on lowest
+aggregate race score per regatta/class/division; these are review candidates,
+not official trophy records.
 
 ## How Existing Data Feeds This
 
@@ -180,7 +194,7 @@ Missing pieces:
 - Annual award instances.
 - Trophy media and 3D scan metadata.
 - Manual curation/review state.
-- Almanac export scripts.
+- Curated trophy intake records.
 
 ## Proposed Implementation Phases
 
@@ -216,7 +230,7 @@ Missing pieces:
 1. Apply or adapt `schema/almanac_trophy_schema.sql` for a pilot database.
 2. Use `data/trophy_intake/perpetual_trophy_template.csv` for the first club
    trophy-history intake.
-3. Add a first `analysis/export_almanac.py` that emits JSONL for clubs,
-   regattas, boats, sailors, and source citations.
+3. Run `analysis/export_almanac.py` and hand the JSONL bundle to the
+   `sailing-almanac` repo.
 4. Pick one pilot club and model 3-5 perpetual trophies manually.
-5. Define the handoff format expected by the `sailing-almanac` repo.
+5. Replace reviewed candidate awards with curated `trophy_awards` records.

@@ -21,6 +21,8 @@ pipeline or almanac work.
   - `ops/run_harvest_cycle.sh`
   - environment-configurable YachtScoring and Regatta Network upper bounds
   - server cron installation notes in `ops/README.md`
+- Installed the server cron block on `chantecler-01` and verified the runner
+  with a no-harvest smoke test.
 
 ## Local Data Baseline
 
@@ -121,8 +123,9 @@ Generated manifest: `exports/almanac/manifest.json`
 1. Decide whether to update docs to reflect the current Clubspot reality:
    parser missing as a separate file, but Clubspot import exists in
    `cs_harvester.py`.
-2. Install the server cron entries from `ops/README.md` on `chantecler-01`.
-3. Extend or run a separate sync path for `raw_intl/` if Sailwave source files
+2. Extend or run a separate sync path for `raw_intl/` if Sailwave source files
    are needed locally.
+3. Review the first scheduled harvest log after the next 08:15 UTC run:
+   `~/sailing-records/ops/logs/`.
 4. Pick one pilot club for trophy/almanac modeling and use
    `data/trophy_intake/perpetual_trophy_template.csv` as the intake shape.

@@ -76,3 +76,37 @@ git add ingestion/rn_harvester.py
 git commit -m "..."
 git push
 ```
+
+## Server cron
+
+The authoritative server should run collection from `~/sailing-records`, where
+the canonical databases and raw files live. Use `ops/run_harvest_cycle.sh` so
+runs are locked, logged, and repeatable.
+
+Install example:
+
+```bash
+ssh chantecler-01
+cd ~/sailing-records
+git pull
+chmod +x ops/run_harvest_cycle.sh
+crontab -e
+```
+
+Recommended schedule:
+
+```cron
+# Nightly lightweight discovery, parsing, analysis, and almanac export.
+15 2 * * * SAILING_RECORDS_DIR=$HOME/sailing-records YACHT_SCORING_MAX=65000 REGATTA_NETWORK_MAX_ID=34000 RUN_CLUBSPOT=0 $HOME/sailing-records/ops/run_harvest_cycle.sh
+
+# Weekly Clubspot refresh. This is heavier because it pages the public API.
+15 4 * * 0 SAILING_RECORDS_DIR=$HOME/sailing-records RUN_DISCOVERY=0 RUN_CLUBSPOT=1 RUN_PARSE=0 RUN_ANALYSIS=1 RUN_EXPORT=1 $HOME/sailing-records/ops/run_harvest_cycle.sh
+```
+
+Logs are written to `ops/logs/` and ignored by Git.
+
+Current caveat: YachtScoring and Regatta Network URL discovery are scheduled
+here, but their raw-result fetch step is still separate from the active parser
+scripts. Before relying on the nightly job for full YachtScoring or Regatta
+Network backfill, restore or promote the relevant raw fetchers from `archive/`
+into `ingestion/`.

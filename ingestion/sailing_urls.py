@@ -1,5 +1,6 @@
 import httpx
 from bs4 import BeautifulSoup
+import os
 import sqlite3
 import time
 import sys
@@ -8,7 +9,7 @@ import sys
 DB_NAME = 'sailing_urls.db'
 SLEEP_TIME = 0.2  # Seconds between requests
 YACHT_SCORING_START = 1
-YACHT_SCORING_MAX = 60000  # Adjust as the years go on
+YACHT_SCORING_MAX = int(os.environ.get('YACHT_SCORING_MAX', '65000'))
 
 def setup_db():
     conn = sqlite3.connect(DB_NAME)

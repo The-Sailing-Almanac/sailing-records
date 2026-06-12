@@ -9,6 +9,7 @@ platform='RegattaNetwork'.
 Resumes from highest already-scanned ID. Idempotent.
 """
 import re
+import os
 import sqlite3
 import time
 import urllib.request
@@ -20,7 +21,7 @@ USER_AGENT = "Mozilla/5.0 (sailing-legacy-research)"
 SLEEP_BETWEEN = 0.3
 
 MIN_ID = 1
-MAX_ID = 32000
+MAX_ID = int(os.environ.get("REGATTA_NETWORK_MAX_ID", "34000"))
 
 
 def fetch(url):

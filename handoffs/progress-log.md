@@ -4,6 +4,33 @@ Running record of completed work batches. Most recent first.
 
 ---
 
+## 2026-06-17 — LiDAR Scanning Models Reference Doc
+
+**Goal:** Record product strategy and operational playbook for the LiDAR/3D scanning
+layer of the sailing-almanac virtual trophy room.
+
+**Work completed:**
+- Added `docs/lidar-scanning-models.md` covering: revenue models (asset packs, refit
+  templates, print-on-demand, B2B pipelines), yacht club trophy scanning service
+  (contracted virtual trophy rooms, "keeper trophy" upsell, Layline Digital integration),
+  the two-pass reprojection workflow for reflective silver/brass, operational tiers
+  (Mail-In / Heritage Kit / Contractor / White-Glove), equipment recommendations, R&D
+  trust-building strategy, conservator protocol, and handheld scanning techniques.
+
+**Decisions made:**
+- AESUB Blue vanishing spray is the standard solution for scanning reflective
+  silver/brass trophies — it sublimates within 2–4 hours, leaving no residue.
+- Two-pass reprojection (separate texture and geometry captures) is the canonical
+  workflow for preserving authentic tarnish/patina on the final mesh.
+- The White-Glove tier (on-site residency) is the flagship delivery model for
+  premium assets like binnacles and steering wheels.
+
+**Recommended next batch:** Pick a pilot yacht club, test the Heritage Kit tier workflow
+end-to-end, and produce a first `trophy_media` record with `media_type = '3d_scan'`
+against an existing trophy in the almanac schema.
+
+---
+
 ## 2026-06-02 — Sailing Almanac Product Pivot
 
 **Goal:** Reframe `sailing-records` as the evidence database for the

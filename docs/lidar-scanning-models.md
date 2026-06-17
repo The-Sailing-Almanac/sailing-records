@@ -113,12 +113,35 @@ To keep dents and damage while achieving realistic metal textures:
 
 ## Essential Tools for Consistency
 
-- **Turntables:** Ortery PhotoCapture 360s (tethered) for studios; Orbit600 Smart
-  (programmable degree-increments) for DIY kits.
-- **Stabilization:** Avoid ball heads (they sag). Use Geared Heads (e.g., Manfrotto 410
-  Junior, Benro GD3WH) for micrometric stability.
-- **Field Kit:** Dual-handle smartphone cage (prevents shake), blue painter's tape (for
-  landmarks), and AESUB spray.
+### High-End Studio (Mail-In Tier)
+
+- **Turntable:** Ortery PhotoCapture 360s — tethers to DSLR and computer; controls
+  table and shutter simultaneously. Run the 36-shot shiny pass, spray with AESUB, click
+  once to run the exact same 36-shot matte pass without touching the camera or table.
+- **Stabilization:** Avoid ball heads (they sag under camera weight when locked).
+  Use a **Geared Head** — interlocking brass/steel cogs, micrometric adjustment,
+  physically cannot sag. Recommended: Manfrotto 410 Junior Geared Head.
+
+### Contractor / Travel Kits
+
+- **Turntable:** Orbit600 Smart 360° Professional — programmable degree-increments
+  (5°–180°), 150 kg capacity, no computer tether required.
+- **Stabilization:** Benro GD3WH 3-Way Geared Head — magnesium alloy (lighter for
+  travel), independent triple-axis controls, same sag-free precision as the Manfrotto.
+
+### Low-Cost DIY Kit (Heritage Kit Tier)
+
+Designed for club social media managers and low-experience contractors. Removes all
+photographer movement decisions.
+
+- **Dual-handle smartphone cage:** Eliminates finger fatigue; prevents accidental screen
+  taps; two-handed grip braces the camera frame against the body.
+- **Manual Lazy Susan:** For small items, the user holds the phone still against their
+  chest and spins the table slowly with one thumb. Tripod optional.
+- **Blue painter's tape:** Visual landmarks on smooth or monochromatic surfaces.
+- **Dry shampoo or aerosol baby powder:** Matte-finish alternative to AESUB for
+  modern, non-antique hardware.
+- **AESUB Blue spray:** Reserve for museum-grade silver and brass only.
 
 ---
 
@@ -135,32 +158,160 @@ To keep dents and damage while achieving realistic metal textures:
 
 ## Conservator Protocol (When Visiting Clubs)
 
-- **Gear:** White cotton or black nitrile gloves, padded microfiber mat, AESUB Safety
-  Data Sheet (SDS).
-- **The "Ice Cube" Analogy:** Explain sublimation to the historian — it vanishes like dry
-  ice.
-- **Live Demo:** Spray a thrift-store goblet to prove safety before touching their
-  artifacts.
-- **Pitch:** Frame the scan as a "Digital Insurance Policy" for history that cannot be
-  bought back if destroyed.
+Your primary goal at the first visit is managing the club historian's anxiety, not
+getting a perfect scan. These trophies are holy relics. Equipment and language that
+signals "museum conservator" rather than "tech enthusiast" is the entire sale.
+
+### Equipment Checklist
+
+Bring all of these even for a casual visit — the visual cue changes everything.
+
+- **White cotton or black nitrile gloves:** Never touch antique silver with bare hands.
+  The oils on human skin are acidic and cause rapid tarnishing. Pulling out a fresh
+  pair instantly signals professionalism.
+- **Padded microfiber changing mat:** Lay this on the table before placing any trophy.
+  Never set a historical object directly on hard wood or plastic.
+- **The "sacrificial" trophy:** A cheap, highly polished silver-plated goblet or bowl
+  from a thrift store. Use this for the live spray demo — they never watch AESUB hit
+  their history first.
+- **AESUB Safety Data Sheet (SDS):** Print it, highlight "Sublimating," "Pigment-Free,"
+  and "Residue-Free."
+- **iPad with a live 3D demo:** Pre-load a high-detail spinning 3D model in the Layline
+  interface. Let the historian spin it with their own fingers. Show, don't tell.
+
+### Talking Points
+
+**Defusing the spray panic — the "Ice Cube" analogy:**
+> "To capture the engraved names at millimeter accuracy, we use a museum-grade archival
+> spray called AESUB. It uses sublimation — exactly like dry ice. It goes straight from
+> solid to gas. We don't wipe it off, we don't wash it off. Within a few hours it
+> completely vanishes, leaving the silver exactly as it was when we walked in."
+
+**The live demo (ultimate trust closer):**
+Pull out the thrift-store goblet and your gloves. Spray half of it in front of them.
+Let them watch it turn matte white and dry in seconds. Then hand them the iPad:
+> "See how this kills the glare? That's what allows our cameras to read the exact depth
+> of every engraved name."
+
+**The Digital Insurance Policy pitch:**
+> "If the clubhouse ever suffers a fire or break-in, insurance money can buy a new
+> silver bowl, but it can't buy back the specific dents, the exact font of the 1934
+> engravings, or the character of the original. This scan is a sub-millimeter digital
+> insurance policy. A silversmith can use this exact digital twin to recast the trophy
+> identically."
+
+**Connecting history to the active fleet:**
+> "Right now, these names are locked behind glass. The sailors racing this weekend don't
+> know whose names are on the 1974 Commodore's Cup. By digitizing this, we're bringing
+> the history out of the lobby and putting it on the smartphones of the active racing
+> fleet."
 
 ---
 
-## General Scanning Markets
+## Hobbyist & Adjacent Markets
 
-1. Real Estate/As-Builts: Floor plans for architects and contractors.
-2. E-commerce: 3D models for online stores (e.g., Sketchfab).
-3. Sports Memorabilia: "Virtual Vaults" for insurance or AR display.
-4. Sculptors: Digital scaling for large-scale statue fabrication.
-5. Sneakerheads: AR holographic archives.
-6. Restomod/Automotive: Reverse engineering obsolete parts.
+The capture-once/sell-repeatedly infrastructure is asset-agnostic. The same kit and
+central processing pipeline serves these secondary markets with no additional field work.
+
+### Real Estate / As-Builts
+Scan home and commercial room layouts with Polycam or Canvas: Room Capture. Export
+ready-to-use CAD files (.DWG or .SKP) for architects, contractors, and interior designers.
+A standard residential scan runs $150–$500 depending on size and whether you process the
+CAD export yourself.
+
+### E-commerce & Asset Marketplaces
+Export .OBJ, .STL, or .GLTF files to Sketchfab, TurboSquid, or CGTrader. Simple objects
+sell for $10–$50; custom business assets command higher premiums.
+
+### High-End Sports Memorabilia — The "Virtual Vault"
+Collectors of game-worn jerseys, signed equipment, and historic gear face a preservation
+paradox: to protect a $50,000 item from UV degradation, it lives locked in a dark safe.
+
+- **The Service:** Capture the exact scuff marks on a game-used bat or the specific
+  grass stains on a jersey as a millimeter-accurate fingerprint for insurance and
+  authentication.
+- **The "Virtual Vault" Upsell:** A web-based 3D display the collector can show off on
+  an iPad without touching the original. The scan also provides better condition proof
+  than any 2D photo.
+
+### Traditional Sculptors & Ceramicists — The Scaling Problem
+Clay and wax sculptors need digital benefits but hate digital workflows. When a sculptor
+gets commissioned to scale a 12-inch clay maquette up to a 6-foot bronze statue, doing
+it by hand is a month of math and armature work.
+
+- **The Service:** Send them the DIY kit to scan their 12-inch clay model.
+- **B2B Upsell:** Scale the scan digitally, slice it into printable sections, and ship
+  back a 6-foot foam or plastic armature the artist finishes with a thin clay layer.
+- **B2C Upsell:** Print 100 small resin replicas for them to sell as limited-edition
+  desktop pieces.
+
+### Sneakerheads & Streetwear Archives
+Rare sneakers ($2,000+ for original Air Jordans or limited collaborations) are ideal
+scan targets: matte textures, lots of distinct visual landmarks, zero reflections.
+
+- **The Service:** Scan before the shoe is sealed in an acrylic display case.
+- **The Upsell:** Deliver AR files so the collector can project a 3D hologram of their
+  exact shoe onto a table through their phone camera. Also offer full-color 3D-printed
+  keychain replicas with the specific creases of their shoe.
+
+### Vintage Car & Restomod Builders — Resurrection as a Service
+Builders restoring 1960s Porsches, old Chris-Craft wooden boats, or custom motorcycles
+routinely hit a wall: the plastic trim, dashboard bezels, or metal badges they need
+haven't been manufactured in 50 years.
+
+- **The Service:** The restorer uses the kit to scan a broken dashboard dial, a cracked
+  tail-light housing, or a rusted-out hood ornament.
+- **The Upsell:** Your processing team imports the scan into Blender or CAD, digitally
+  repairs the cracks, mirrors the geometry if needed (left piece → right piece), and
+  delivers a flawless .STL for CNC machining or industrial 3D printing.
+
+### Common Thread
+In every market above, the customer has a physical asset they are afraid to touch,
+unable to duplicate, or need to lock away. The sale is not a "point cloud" — it is the
+ability to interact with, scale, or permanently preserve their most prized possessions.
 
 ---
 
 ## Handheld Scanning Techniques
 
-- **Small Items:** Shuffle feet in a circle; keep phone steady; use a Lazy Susan.
-- **Large Items:** Use the "Ninja Walk" (bent knees, heel-to-toe); maintain constant
-  2–4 ft distance.
-- **Tips for Smoothness:** Use a dual-handle cage; scan on cloudy days (no glare); use
-  dry shampoo spray for matte finish on shiny surfaces.
+**App selection:** Use Photogrammetry (Photo Mode) or Object Capture — never raw LiDAR
+point-cloud mode for archival objects. Point clouds require complex desktop software to
+stitch and are inappropriate for contractor or DIY workflows.
+
+| App | Best For | Notes |
+| :--- | :--- | :--- |
+| Polycam (Photo Mode) | Small trophy-scale items | Gold standard; AI background removal; processes on cloud |
+| Scaniverse | Kayak-to-dinghy-hull scale | Free; processes on-device; fast; good for large paths |
+| KIRI Engine | Small objects with complex undersides | Advanced object masking; handles held/flipped items |
+
+### Technique by Object Size
+
+**Small items (baseball to winch size):**
+Examples: compasses, shackles, brass anchors, rigging blocks.
+- Place on a flat, non-reflective surface.
+- Move your body, not the object: shuffle feet in a slow 360° circle.
+- Shoot 30–50 overlapping photos at three heights (low, eye-level, high looking down).
+- Grip: hold phone with both hands pressed against chest/stomach to brace elbows.
+- Alternative to circle walk: place item on a Lazy Susan, stand still, spin the table
+  with your thumb — requires a plain background so the rotating environment doesn't
+  confuse the stitching software.
+
+**Large items (life jacket to kayak size):**
+Examples: kayaks, outboard cowlings, steering wheels.
+- Set up outside on a cloudy day, or in an evenly lit garage.
+- **The Ninja Walk:** Bend knees slightly, roll feet heel-to-toe to absorb step shock.
+  Keep the phone consistently 2–4 ft from the surface as you glide the perimeter.
+- Ensure each photo overlaps the last by ~70%. Use continuous capture mode if available.
+
+### Overcoming Shiny Surfaces (Non-Museum Items)
+
+For non-antique nautical gear (glossy fiberglass, modern polished steel, clear plastic
+compass domes), AESUB is overkill. Use these instead:
+
+- **Cloudy-day scanning:** Overcast skies kill harsh sun glare on boat hulls naturally.
+- **Dry shampoo or baby powder spray:** Creates a temporary matte finish identical to
+  AESUB for non-precious objects. Wipes off completely with a damp towel afterward.
+- **Blue painter's tape landmarks:** Smooth, single-colored surfaces (white outboard
+  cowlings, varnished tillers) confuse stitching software because every angle looks
+  identical. Stick a few pieces of tape with rough marker scribbles around the item to
+  give the app distinct visual tracking points.

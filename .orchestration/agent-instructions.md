@@ -1,40 +1,28 @@
 ---
 repo_name: sailing-records
-repo_type: Maritime Data
-security_tier: 2
-lifecycle: "Active ? Planning"
-updated: "2026-06-19"
+repo_type: Sailing Race Records / Historical Data
+lifecycle_state: Active
+security_tier: Strong
+cluster: Maritime
+updated: "2026-06-20"
 ---
-
-# Agent Instructions ? sailing-records
-
-## Security Tier: Strong (2)
-Standard agent autonomy. All work via PR ? never push directly to main. No secrets in code or commit messages.
-
+# Agent Instructions — sailing-records
+## Security Tier: Strong
+All changes via PR. No direct pushes to main.
 ## What this repo does
-Stores sailing race records and scoring data.
-
+Historical sailing race records, results, and data. Maritime cluster reference/archive.
 ## Cluster
 Maritime
-
-## Upstream dependencies
-Race result inputs and source record collection
-
-## Downstream consumers
-Scoring, reporting, and maritime analysis consumers
-
 ## Active horizon
 ```yaml
 horizon:
-  goal: "Apply STAX Format Wave 2 governance to sailing-records and establish baseline agent rules"
-  active_sub_state: "Planning"
-  next_milestone: "First productive agent task under governance in sailing-records"
-  blockers: []
+  goal: "Organize and maintain sailing race records
+  active_sub_state: Maintaining
+  next_milestone: TBD
+  blockers: []"
 ```
-
 ## Agent rules
-1. Read this file before any action in this repo.
-2. All changes via PR to main. No direct pushes.
-3. No credentials, tokens, or secrets in any file tracked by git.
-4. Portfolio-wide rules: `stax/ops/stax-format.md`
-5. If uncertain about scope, check `stax/handoffs/handoff-current.md` for orchestration context.
+1. Read this file before any action.
+2. All changes via PR to main.
+3. No credentials in tracked files.
+4. Portfolio-wide rules: stax/ops/stax-format.md

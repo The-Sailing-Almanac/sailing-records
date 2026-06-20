@@ -1,0 +1,10 @@
+repo_name: sailing-records
+repo_type: Sailing Race Records / Historical Data
+lifecycle_state: Active
+security_tier: Strong
+model: claude-haiku-4-5
+max_tokens: 4000
+daily_budget_usd: 0.50
+spend_tier_order:
+  - web_subscription
+  - console_api

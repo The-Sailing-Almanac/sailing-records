@@ -22,3 +22,13 @@ Our mission is to eliminate the pain of manual data entry, complicated spreadshe
 | [docs/product-brief.md](docs/product-brief.md) | MVP scope, target buyer, competitive landscape, GTM strategy |
 | [docs/roadmap.md](docs/roadmap.md) | 7-phase development roadmap with exit criteria per phase |
 | [docs/feature-parity.md](docs/feature-parity.md) | Mandatory feature checklist for market parity vs Sailwave / Regatta Network |
+
+## Lifecycle & Governance
+
+| Field | Value |
+|---|---|
+| Lifecycle State | Staged-Shell (Waiting) |
+| Security Tier | Strong |
+| Governance | `.orchestration/agent-instructions.md` |
+
+This repo follows STAX governance. See `.orchestration/` for operating rules, safe-task tiers, and the AI audit log. It is a deliberate staged shell — no active development until the ss- fleet direction is decided.

@@ -1,0 +1,11 @@
+repo_name: yacht_scoring
+repo_type: Sailing Race Management Micro-SaaS
+lifecycle_state: Staged-Shell
+active_sub_state: Waiting
+security_tier: Strong
+model: claude-sonnet-4-6
+max_tokens: 8000
+daily_budget_usd: 1.00
+spend_tier_order:
+  - web_subscription
+  - console_api

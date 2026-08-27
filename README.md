@@ -1,5 +1,4 @@
-# Sailing Records
-
+# Sailing Almanac & Layline Scoring
 
 > [!IMPORTANT]
 > **🤖 FOR AI AGENTS, CODING COMPANIONS, AND AUTOMATED SYSTEMS:**
@@ -9,76 +8,65 @@
 >
 > You are required to run through the **Inventory ➔ Summarize ➔ Classify ➔ Propose ➔ Implement ➔ Update Docs ➔ Archive Leftovers** sequence for every run.
 
+**Sailing Almanac** is the keystone repository for competitive sailing intelligence, historical racing records, perpetual trophy databases, and modern club race scoring systems.
 
+---
 
-A sailing records and sailing intelligence system — the SABR of competitive sailing.
+## Monorepo Architecture
 
-Ingests, normalizes, links, and analyzes racing history across four current
-platforms: YachtScoring, ICSA Techscore, Regatta Network, and Clubspot.
+This monorepo is managed with the modern **`uv` Workspace Standard**:
 
-The next expansion track is international and multilingual, with Europe first.
-Candidate sources include manage2sail, Sailwave published results, RegattaBase,
-and SailingResults.net. See [docs/international.md](docs/international.md).
-
-## What this is
-
-A local-first research and data product. Not a scoring SaaS. The goal is historically interesting, analytically useful, explainable records and findings about competitive sailing.
-
-Output layers: **query tool** · **visualizations** · **reports and findings**
-· **sailing-almanac exports**
-
-The next product-facing use case is the `sailing-almanac` project: club history,
-annual trophies, perpetual awards, and virtual trophy rooms backed by verified
-result evidence from this database.
-
-## Repo layout
-
-```
-ingestion/   harvesters and parsers (the data pipeline)
-analysis/    family detection, query utilities
-schema/      migration scripts (historical reference)
-verify/      data validation and integrity checks
-archive/     retired diagnostic and one-off scripts
-docs/        schema reference, source notes, pipeline documentation
-handoffs/    project manager handoff documents and progress logs
-raw/         YachtScoring raw JSON (gitignored, local only)
-raw_icsa/    ICSA Techscore raw HTML (gitignored, local only)
-raw_rn/      Regatta Network raw HTML (gitignored, local only)
-raw_intl/    International raw source files (gitignored, local only)
-diagnostic/  raw HTML specimens for parser development reference
+```text
+sailing-almanac/
+├── pyproject.toml              # Root workspace manifest
+├── uv.lock
+├── .env.example
+│
+├── packages/
+│   └── sailing-records/        # Core pipeline package
+│       ├── pyproject.toml
+│       └── src/sailing_records/
+│           ├── ingestion/      # Harvesters & parsers (YachtScoring, ICSA, Regatta Network, Clubspot, Sailwave)
+│           ├── analysis/       # Family detection & almanac export engine
+│           ├── schema/         # SQLite schema & migration tooling
+│           └── verify/         # Integrity checking scripts
+│
+├── apps/
+│   └── layline-scoring/        # Layline Scoring specifications & SaaS engine
+│       ├── pyproject.toml
+│       └── docs/               # Product brief, roadmap, competitive analysis, feature parity
+│
+├── data/                       # Seeds, trophy intake, schema SQL (database files .db gitignored)
+├── docs/                       # Monorepo technical documentation
+└── ops/                        # Operational runbooks & sync automation
 ```
 
-## Key databases (local only, gitignored)
+---
 
-| File | Purpose |
-|---|---|
-| `sailing_data.db` | Main analytical database (~400 MB) |
-| `sailing_urls.db` | URL registry for harvesters |
+## Quickstart & Development
 
-## Docs
-
-- [Pipeline overview](docs/pipeline.md)
-- [Schema reference](docs/schema.md)
-- [Data sources and provenance](docs/sources.md)
-- [International and multilingual expansion](docs/international.md)
-- [Sailing Almanac foundation](docs/sailing-almanac.md)
-- [Current handoff / project state](handoffs/HANDOFF-2026-05-18.md)
-
-## Running the pipeline
-
-All scripts are run from the project root:
-
+### 1. Environment Setup
 ```bash
-python ingestion/icsa_harvester.py
-python ingestion/rn_harvester.py
-python ingestion/cs_harvester.py
-python ingestion/sailwave_harvester.py
-python ingestion/icsa_parser.py
-python ingestion/rn_parser.py
-python ingestion/parser.py
-python ingestion/sailwave_parser.py
-python analysis/detect_families.py
-python analysis/export_almanac.py
+# Install workspace dependencies via uv
+uv sync
+
+# Run workspace tests
+uv run pytest
 ```
 
-See [docs/pipeline.md](docs/pipeline.md) for sequencing, resume behavior, and current gaps.
+### 2. Running Data Pipelines
+```bash
+# Harvest and parse data
+uv run python -m sailing_records.ingestion.icsa_harvester
+uv run python -m sailing_records.ingestion.parser
+
+# Run family detection and exports
+uv run python -m sailing_records.analysis.detect_families
+uv run python -m sailing_records.analysis.export_almanac
+```
+
+---
+
+## Consolidated Repositories
+* **`sailing-records`**: Ingestion, historical database, and trophy almanac engine (`packages/sailing-records`).
+* **`yacht_scoring`** (`layline-scoring`): Scoring rules, race series management, and SaaS specifications (`apps/layline-scoring`).

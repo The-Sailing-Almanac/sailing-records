@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "layline-scoring"
+version = "1.0.0"
+description = "Layline scoring specifications and race series management"
+requires-python = ">=3.12"
+dependencies = [
+    "sailing-records",
+]
+
+[tool.uv.sources]
+sailing-records = { workspace = true }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/layline_scoring"]

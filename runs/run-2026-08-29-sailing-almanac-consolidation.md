@@ -83,3 +83,10 @@ original command records.
 
 The corrected tip must pass the complete isolated validation again and receive a
 second independent review before publication.
+
+The second review confirmed the harvest-runner correction and found one remaining
+machine-specific PDF parser command. The consolidated package also omitted the
+parser's `pypdf` dependency, which had previously come from an external bundled
+runtime rather than `requirements.txt`. The workspace package now owns that
+dependency, and the runbook uses the same locked module command for HTML and PDF
+inputs.

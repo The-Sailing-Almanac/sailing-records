@@ -141,12 +141,8 @@ Recommended first implementation:
 # 2. Harvest seeded Sailwave HTML/PDF sources into raw_intl/sailwave/
 uv run --locked python -m sailing_records.ingestion.sailwave_harvester
 
-# 3. Parse static Sailwave HTML while preserving original headers/cells
+# 3. Parse static Sailwave HTML/PDF while preserving original source text
 uv run --locked python -m sailing_records.ingestion.sailwave_parser
-
-# Use the bundled runtime when parsing preserved Sailwave PDFs, because it
-# includes pypdf:
-# C:\Users\aewoo\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe ingestion\sailwave_parser.py
 
 # 4. Link exact Sailwave sailor identities to existing platforms
 uv run --locked python -m sailing_records.analysis.link_sailwave_aliases

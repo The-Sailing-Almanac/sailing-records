@@ -1,5 +1,11 @@
 # ⛵ Yacht Scoring
 
+> [!NOTE]
+> This is the canonical home of the former
+> [`woodyardae/yacht_scoring`](https://github.com/woodyardae/yacht_scoring)
+> repository. Its standalone `main` branch was retired at
+> `30fc8d171027c4c4c6394cd888ef218e7ce61425`.
+
 
 > [!IMPORTANT]
 > **🤖 FOR AI AGENTS, CODING COMPANIONS, AND AUTOMATED SYSTEMS:**

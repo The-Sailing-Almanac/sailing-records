@@ -46,3 +46,28 @@ build, or test command is used. The isolated validation checks:
 
 The validation checkout and bundle are removed after the run. There is no
 deployment step.
+
+## Validation Evidence
+
+The proof run used a bundle containing commit
+`3b801ba53156baf59e547edd4ea1cf7240679fbb` and `master`, cloned into the unique
+checkout `/tmp/sailing-almanac-validation-Fk546U` on `chantecler-01`.
+
+| Check | Result |
+|---|---|
+| Remote toolchain | `uv 0.12.6`, Python `3.12.3` |
+| Current member defaults | Sailing Records `87f8f909aab69634f3ecb9888b63de6df6243cdf`; Yacht Scoring `30fc8d171027c4c4c6394cd888ef218e7ce61425` |
+| Yacht history | 13 source commits through `2796d06474e9e2dccca91680fcbcbec7c2dac2f6`, equal to the filtered-history count |
+| Yacht tree | Exact match after excluding the workspace package files and removing the documented canonical-location note |
+| Sailing Records tree | Exact match for `analysis`, `ingestion`, `schema`, and `verify` |
+| Data contracts | Both source-seed CSVs, trophy intake CSV, and trophy schema have identical Git blob IDs |
+| License contract | No license, copying, or notice file exists in either source or the consolidated tree |
+| Generated-data contract | No tracked export; generated directories contain only `.gitkeep` |
+| Locked workspace sync | Passed with both workspace packages installed from their local member paths |
+| Tests | `4 passed` |
+| Package builds | Layline Scoring and Sailing Records each produced an sdist and wheel |
+
+The bundle and checkout were deleted by the validation trap after the successful
+run. A final fresh-bundle validation is required after this evidence is committed
+so that the reviewed branch tip, rather than its documentation parent, is the
+verified artifact.

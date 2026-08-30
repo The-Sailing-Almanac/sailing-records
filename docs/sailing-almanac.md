@@ -166,7 +166,7 @@ Each export row should include stable IDs, source URLs, and enough provenance fo
 Generate the first bundle with:
 
 ```bash
-python analysis/export_almanac.py
+uv run --locked python -m sailing_records.analysis.export_almanac
 ```
 
 Generated export files are written under `exports/almanac/` and are gitignored.
@@ -201,7 +201,8 @@ Missing pieces:
 ### Phase A: Trophy Schema and Export
 
 - Add trophy-oriented schema migrations or reference DDL.
-- Add `analysis/export_almanac.py` to create JSONL exports.
+- Use `packages/sailing-records/src/sailing_records/analysis/export_almanac.py`
+  to create JSONL exports.
 - Seed initial trophy records manually for a small set of clubs.
 - Link trophy awards to existing regatta/boat/sailor evidence where possible.
 
@@ -227,10 +228,13 @@ Missing pieces:
 
 ## Immediate Next Batch
 
-1. Apply or adapt `schema/almanac_trophy_schema.sql` for a pilot database.
+1. Apply or adapt
+   `packages/sailing-records/src/sailing_records/schema/almanac_trophy_schema.sql`
+   for a pilot database.
 2. Use `data/trophy_intake/perpetual_trophy_template.csv` for the first club
    trophy-history intake.
-3. Run `analysis/export_almanac.py` and hand the JSONL bundle to the
+3. Run `uv run --locked python -m sailing_records.analysis.export_almanac` and
+   hand the JSONL bundle to the
    `sailing-almanac` repo.
 4. Pick one pilot club and model 3-5 perpetual trophies manually.
 5. Replace reviewed candidate awards with curated `trophy_awards` records.

@@ -1,0 +1,30 @@
+[tool.uv.workspace]
+members = [
+    "packages/sailing-records",
+    "apps/layline-scoring",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+sailing-records = { workspace = true }
+layline-scoring = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = [
+    "tests",
+    "packages/sailing-records/tests",
+]
+python_files = ["test_*.py", "*_test.py", "*_check.py"]
+pythonpath = [
+    ".",
+    "packages/sailing-records/src",
+    "apps/layline-scoring",
+]

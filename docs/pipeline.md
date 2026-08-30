@@ -43,12 +43,12 @@ All scripts run from the project root. Raw data directories and databases are lo
 
 ### YachtScoring
 
-**Harvester:** `ingestion/sailing_urls.py`
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/sailing_urls.py`
 - Probes sequential event IDs on YachtScoring
 - Resumable via `scraper_state` table in `sailing_urls.db`
 - Writes confirmed URLs to `sailing_urls.db` with `platform='YachtScoring'`
 
-**Parser:** `ingestion/parser.py`
+**Parser:** `packages/sailing-records/src/sailing_records/ingestion/parser.py`
 - Reads raw JSON folders at `raw/{eID}/` (event.json, boats.json, cumulative.json, splits.json)
 - Inserts into: `regattas`, `boats`, `sailors`, `participation`, `race_results`
 - Idempotent: `ON CONFLICT` / `INSERT OR IGNORE` patterns throughout
@@ -58,13 +58,13 @@ All scripts run from the project root. Raw data directories and databases are lo
 
 ### ICSA Techscore
 
-**Harvester:** `ingestion/icsa_harvester.py`
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/icsa_harvester.py`
 - Crawls season indexes from the Techscore homepage (`/seasons/`)
 - Seasons: f08 through present
 - Writes regatta URLs to `sailing_urls.db` with `platform='ICSA'`
 - Resumable
 
-**Parser:** `ingestion/icsa_parser.py`
+**Parser:** `packages/sailing-records/src/sailing_records/ingestion/icsa_parser.py`
 - Reads `raw_icsa/{season}/{slug}/` (main.html, sailors.html)
 - BeautifulSoup parsing of results tables
 - Inserts into: `regattas`, `sailors`, `participation`
@@ -75,13 +75,13 @@ All scripts run from the project root. Raw data directories and databases are lo
 
 ### Regatta Network
 
-**Harvester:** `ingestion/rn_harvester.py`
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/rn_harvester.py`
 - Probes sequential regatta IDs from 1 to ~32,000+
 - Classifies each as `ok` / `empty` / `missing` based on HTML structure
 - Writes to `sailing_urls.db` with `platform='RegattaNetwork'`
 - Resumable via `scraper_state`
 
-**Parser:** `ingestion/rn_parser.py`
+**Parser:** `packages/sailing-records/src/sailing_records/ingestion/rn_parser.py`
 - Reads `raw_rn/{id}/results.html`
 - Dynamic column detection from `<thead>` — handles structural variation across eras
 - Extracts: skipper (with compound splitting), boat name, sail number, yacht club
@@ -91,14 +91,14 @@ All scripts run from the project root. Raw data directories and databases are lo
 
 ### Clubspot
 
-**Harvester:** `ingestion/cs_harvester.py`
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/cs_harvester.py`
 - Paginates the public Parse REST API (1,000 records per batch)
 - No authentication required
 - Fetches regattas + registrations
 - API reference / proof-of-concept: `archive/cs_test.py`
 
 **Parser:** **Not yet built**
-- Target: `ingestion/cs_parser.py`
+- Target: `packages/sailing-records/src/sailing_records/ingestion/cs_parser.py`
 - Should load harvested Clubspot JSON into `regattas`, `boats`, `sailors`, `participation`
 - Model on `rn_parser.py` for structure; reference `archive/cs_test.py` for API data shape
 
@@ -106,7 +106,7 @@ All scripts run from the project root. Raw data directories and databases are lo
 
 ## Analysis
 
-**Family detection:** `analysis/detect_families.py`
+**Family detection:** `packages/sailing-records/src/sailing_records/analysis/detect_families.py`
 - Surname-based family clustering with 5-tier confidence hierarchy:
   - Tier 0: Same name + same boat → merge into canonical identity
   - Tier 1 (high): Same surname + same boat + same regatta
@@ -116,7 +116,7 @@ All scripts run from the project root. Raw data directories and databases are lo
 - Idempotent: drops and rebuilds `families` and `sailor_alias` tables each run
 - Assigns `family_id` to sailors and populates `families` table
 
-**Family lookup:** `analysis/find_family.py`
+**Family lookup:** `packages/sailing-records/src/sailing_records/analysis/find_family.py`
 - CLI utility for inspecting specific family records
 
 ---
@@ -139,17 +139,13 @@ Recommended first implementation:
 #    data/source_seeds/europe.csv and data/source_seeds/worldwide.csv
 
 # 2. Harvest seeded Sailwave HTML/PDF sources into raw_intl/sailwave/
-python ingestion/sailwave_harvester.py
+uv run --locked python -m sailing_records.ingestion.sailwave_harvester
 
-# 3. Parse static Sailwave HTML while preserving original headers/cells
-python ingestion/sailwave_parser.py
-
-# Use the bundled runtime when parsing preserved Sailwave PDFs, because it
-# includes pypdf:
-# C:\Users\aewoo\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe ingestion\sailwave_parser.py
+# 3. Parse static Sailwave HTML/PDF while preserving original source text
+uv run --locked python -m sailing_records.ingestion.sailwave_parser
 
 # 4. Link exact Sailwave sailor identities to existing platforms
-python analysis/link_sailwave_aliases.py
+uv run --locked python -m sailing_records.analysis.link_sailwave_aliases
 ```
 
 ---
@@ -158,21 +154,21 @@ python analysis/link_sailwave_aliases.py
 
 ```bash
 # 1. Harvest URLs
-python ingestion/icsa_harvester.py
-python ingestion/rn_harvester.py
-python ingestion/sailing_urls.py
+uv run --locked python -m sailing_records.ingestion.icsa_harvester
+uv run --locked python -m sailing_records.ingestion.rn_harvester
+uv run --locked python -m sailing_records.ingestion.sailing_urls
 
 # 2. Harvest Clubspot (no separate URL step)
-python ingestion/cs_harvester.py
+uv run --locked python -m sailing_records.ingestion.cs_harvester
 
 # 3. Parse (can run in any order; each is idempotent)
-python ingestion/icsa_parser.py
-python ingestion/rn_parser.py
-python ingestion/parser.py
-# python ingestion/cs_parser.py  ← not yet built
+uv run --locked python -m sailing_records.ingestion.icsa_parser
+uv run --locked python -m sailing_records.ingestion.rn_parser
+uv run --locked python -m sailing_records.ingestion.parser
+# sailing_records.ingestion.cs_parser is not yet built
 
 # 4. Analysis
-python analysis/detect_families.py
+uv run --locked python -m sailing_records.analysis.detect_families
 ```
 
 ---

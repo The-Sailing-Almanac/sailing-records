@@ -11,7 +11,8 @@
 set -uo pipefail
 
 REPO_DIR="${SAILING_RECORDS_DIR:-$HOME/sailing-records}"
-PYTHON_BIN="${PYTHON_BIN:-python3}"
+UV_BIN="${UV_BIN:-uv}"
+PYTHON_BIN="${PYTHON_BIN:-python}"
 LOG_DIR="${LOG_DIR:-$REPO_DIR/ops/logs}"
 LOCK_FILE="${LOCK_FILE:-/tmp/sailing-records-harvest.lock}"
 
@@ -66,30 +67,30 @@ echo "YACHT_SCORING_MAX=$YACHT_SCORING_MAX REGATTA_NETWORK_MAX_ID=$REGATTA_NETWO
 run_step "git pull" git pull --ff-only
 
 if [ "$RUN_DISCOVERY" = "1" ]; then
-  run_step "YachtScoring/ICSA URL discovery" env YACHT_SCORING_MAX="$YACHT_SCORING_MAX" "$PYTHON_BIN" ingestion/sailing_urls.py
-  run_step "ICSA URL discovery" "$PYTHON_BIN" ingestion/icsa_harvester.py
-  run_step "Regatta Network URL discovery" env REGATTA_NETWORK_MAX_ID="$REGATTA_NETWORK_MAX_ID" "$PYTHON_BIN" ingestion/rn_harvester.py
-  run_step "Sailwave seed harvest" "$PYTHON_BIN" ingestion/sailwave_harvester.py
+  run_step "YachtScoring/ICSA URL discovery" env YACHT_SCORING_MAX="$YACHT_SCORING_MAX" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.sailing_urls
+  run_step "ICSA URL discovery" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.icsa_harvester
+  run_step "Regatta Network URL discovery" env REGATTA_NETWORK_MAX_ID="$REGATTA_NETWORK_MAX_ID" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.rn_harvester
+  run_step "Sailwave seed harvest" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.sailwave_harvester
 fi
 
 if [ "$RUN_CLUBSPOT" = "1" ]; then
-  run_step "Clubspot harvest/import" "$PYTHON_BIN" ingestion/cs_harvester.py
+  run_step "Clubspot harvest/import" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.cs_harvester
 fi
 
 if [ "$RUN_PARSE" = "1" ]; then
-  run_step "YachtScoring parse" "$PYTHON_BIN" ingestion/parser.py
-  run_step "ICSA parse" "$PYTHON_BIN" ingestion/icsa_parser.py
-  run_step "Regatta Network parse" "$PYTHON_BIN" ingestion/rn_parser.py
-  run_step "Sailwave parse" "$PYTHON_BIN" ingestion/sailwave_parser.py
+  run_step "YachtScoring parse" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.parser
+  run_step "ICSA parse" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.icsa_parser
+  run_step "Regatta Network parse" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.rn_parser
+  run_step "Sailwave parse" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.ingestion.sailwave_parser
 fi
 
 if [ "$RUN_ANALYSIS" = "1" ]; then
-  run_step "family detection" "$PYTHON_BIN" analysis/detect_families.py
-  run_step "Sailwave alias linking" "$PYTHON_BIN" analysis/link_sailwave_aliases.py
+  run_step "family detection" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.analysis.detect_families
+  run_step "Sailwave alias linking" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.analysis.link_sailwave_aliases
 fi
 
 if [ "$RUN_EXPORT" = "1" ]; then
-  run_step "almanac export" "$PYTHON_BIN" analysis/export_almanac.py
+  run_step "almanac export" "$UV_BIN" run --locked "$PYTHON_BIN" -m sailing_records.analysis.export_almanac
 fi
 
 echo

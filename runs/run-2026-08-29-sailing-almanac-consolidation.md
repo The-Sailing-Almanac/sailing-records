@@ -90,3 +90,22 @@ parser's `pypdf` dependency, which had previously come from an external bundled
 runtime rather than `requirements.txt`. The workspace package now owns that
 dependency, and the runbook uses the same locked module command for HTML and PDF
 inputs.
+
+## Corrected Candidate Proof
+
+Commit `73e719391c7ae90f13a92c239cf157b78bdcafa9` passed the complete
+fresh-bundle validation in `/tmp/sailing-almanac-final-Xm0nXX` on
+`chantecler-01`:
+
+- current default tips, ancestry, 13-commit yacht history, both member-tree
+  comparisons, trophy/data blob identity, and license/generated boundaries
+  passed;
+- harvest shell syntax and consolidated command-path checks passed;
+- all 12 scheduled package modules resolved, including a direct `pypdf` import;
+- locked synchronization resolved 22 packages and installed `pypdf 6.16.2`;
+- all 4 tests passed;
+- both workspace members produced an sdist and wheel.
+
+The candidate bundle and checkout were removed after validation. The final
+documentation-only proof commit is subject to the same fresh-bundle gate before
+publication.

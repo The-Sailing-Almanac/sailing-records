@@ -12,8 +12,8 @@ and any known limitations or ethical considerations.
 **Access method:** Public HTTP endpoints; event data accessed via sequential event ID (`eID`)  
 **Raw format:** JSON (`event.json`, `boats.json`, `races.json`, `splits.json`, `cumulative.json`)  
 **Raw storage:** `raw/{eID}/`  
-**Harvester:** `ingestion/sailing_urls.py` (probes sequential eIDs)  
-**Parser:** `ingestion/parser.py`
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/sailing_urls.py` (probes sequential eIDs)
+**Parser:** `packages/sailing-records/src/sailing_records/ingestion/parser.py`
 
 **What it provides:**
 - Regatta metadata (name, dates, city, state)
@@ -38,8 +38,8 @@ and any known limitations or ethical considerations.
 **Access method:** Public HTML pages; season indexes → regatta slugs  
 **Raw format:** HTML (`main.html`, `sailors.html`)  
 **Raw storage:** `raw_icsa/{season}/{slug}/`  
-**Harvester:** `ingestion/icsa_harvester.py`  
-**Parser:** `ingestion/icsa_parser.py`
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/icsa_harvester.py`
+**Parser:** `packages/sailing-records/src/sailing_records/ingestion/icsa_parser.py`
 
 **What it provides:**
 - College sailing regattas (US collegiate circuit, seasons f08–present)
@@ -63,8 +63,8 @@ and any known limitations or ethical considerations.
 **Access method:** Public HTML; results pages accessed by sequential regatta ID (1–32000+)  
 **Raw format:** HTML results applet (`results.html`)  
 **Raw storage:** `raw_rn/{id}/`  
-**Harvester:** `ingestion/rn_harvester.py`  
-**Parser:** `ingestion/rn_parser.py`
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/rn_harvester.py`
+**Parser:** `packages/sailing-records/src/sailing_records/ingestion/rn_parser.py`
 
 **What it provides:**
 - Club and one-design fleet results
@@ -89,7 +89,7 @@ and any known limitations or ethical considerations.
 **Type:** Regatta registration and management platform  
 **Access method:** Public Parse REST API — no authentication required for public events  
 **Raw format:** JSON (paginated, 1000 records per batch)  
-**Harvester:** `ingestion/cs_harvester.py`  
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/cs_harvester.py`
 **Parser:** **Not yet built** — see [pipeline.md](pipeline.md)
 
 **What it provides:**
@@ -143,8 +143,8 @@ development order.
 **Type:** Published static results from Sailwave scoring software  
 **Initial role:** First international parser target  
 **Raw storage target:** `raw_intl/sailwave/`  
-**Harvester:** `ingestion/sailwave_harvester.py`  
-**Parser:** `ingestion/sailwave_parser.py`  
+**Harvester:** `packages/sailing-records/src/sailing_records/ingestion/sailwave_harvester.py`
+**Parser:** `packages/sailing-records/src/sailing_records/ingestion/sailwave_parser.py`
 **Status:** Seeded first-pass support
 
 **Notes:**

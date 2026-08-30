@@ -71,3 +71,15 @@ The bundle and checkout were deleted by the validation trap after the successful
 run. A final fresh-bundle validation is required after this evidence is committed
 so that the reviewed branch tip, rather than its documentation parent, is the
 verified artifact.
+
+## Independent Review
+
+The first independent review identified a merge blocker in
+`ops/run_harvest_cycle.sh`: scheduled commands still referenced the source
+repository's former root-level script paths. The automation now executes the
+packaged modules with `uv run --locked python -m sailing_records...`, and active
+runbooks point to the consolidated paths. Historical run briefs retain their
+original command records.
+
+The corrected tip must pass the complete isolated validation again and receive a
+second independent review before publication.

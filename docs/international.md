@@ -137,8 +137,10 @@ Every international parser should:
 1. Create a curated seed file for European sources with source URL, platform,
    country, language hint, and notes.
 2. Build a Sailwave static HTML parser against 5-10 saved European result pages.
-   First-pass scripts exist as `ingestion/sailwave_harvester.py` and
-   `ingestion/sailwave_parser.py`.
+   First-pass scripts exist as
+   `packages/sailing-records/src/sailing_records/ingestion/sailwave_harvester.py`
+   and
+   `packages/sailing-records/src/sailing_records/ingestion/sailwave_parser.py`.
 3. Build a manage2sail discovery/report harvester for seeded events.
 4. Add a translation/normalization metadata table only after at least two
    multilingual sources prove what fields need it.

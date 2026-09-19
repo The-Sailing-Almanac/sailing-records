@@ -1,0 +1,50 @@
+name: KB Sync
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  kb-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install tools
+        run: |
+          npm install -g repomix --silent
+          pip install --quiet notion-client md2notionpage python-dotenv
+
+      - name: Pack with Repomix
+        run: |
+          repomix \
+            --style json \
+            --compress \
+            --output repomix-output.json \
+            --ignore "**/node_modules/**,**/*.lock,**/*.png,**/*.jpg,**/*.svg,**/*.pdf,**/.git/**"
+
+      - name: Generate KB artifacts and push to Notion
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY##*/}"
+          ABBREV=$(echo "$REPO_NAME" | tr '[:lower:]' '[:upper:]' | tr -dc 'A-Z' | cut -c1-3)
+          mkdir -p kb-output
+          python3 .github/scripts/generate_dual_db.py \
+            --input repomix-output.json \
+            --repo "$REPO_NAME" \
+            --abbrev "$ABBREV" \
+            --timeframe daily \
+            --output-dir ./kb-output \
+            --category owned
+          SUMMARY=$(ls ./kb-output/human/*.md 2>/dev/null | head -1)
+          if [[ -n "$SUMMARY" ]]; then
+            python3 .github/scripts/push_to_notion.py --file "$SUMMARY"
+          fi
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_PARENT_PAGE_ID: ${{ secrets.NOTION_PARENT_PAGE_ID }}
+          NOTION_KB_PAGE_ID: ${{ secrets.NOTION_KB_PAGE_ID }}

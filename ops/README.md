@@ -65,14 +65,14 @@ git pull
 bash ops/pull-data.sh
 
 # 2. Do work (run harvesters, parsers, analysis)
-python ingestion/rn_harvester.py
-python ingestion/rn_parser.py
+uv run --locked python -m sailing_records.ingestion.rn_harvester
+uv run --locked python -m sailing_records.ingestion.rn_parser
 
 # 3. Push results back to server
 bash ops/push-data.sh
 
 # 4. Commit and push any code changes
-git add ingestion/rn_harvester.py
+git add packages/sailing-records/src/sailing_records/ingestion/rn_harvester.py
 git commit -m "..."
 git push
 ```
@@ -109,4 +109,4 @@ Current caveat: YachtScoring and Regatta Network URL discovery are scheduled
 here, but their raw-result fetch step is still separate from the active parser
 scripts. Before relying on the nightly job for full YachtScoring or Regatta
 Network backfill, restore or promote the relevant raw fetchers from `archive/`
-into `ingestion/`.
+into `packages/sailing-records/src/sailing_records/ingestion/`.

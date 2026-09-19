@@ -103,7 +103,7 @@ Sailor × Boat × Regatta × Role associations. One row per person-per-event-per
 Unique constraint: `(sailor_id, boat_id, regatta_id, role)`  
 Indexes: `idx_part_regatta`, `idx_part_boat`, `idx_part_sailor`
 
-**Note:** `boat_id` is nullable by design — ICSA college sailing has no vessel concept. Added via `schema/migrate_participation_v2.py`.
+**Note:** `boat_id` is nullable by design — ICSA college sailing has no vessel concept. Added via `packages/sailing-records/src/sailing_records/schema/migrate_participation_v2.py`.
 
 ---
 
@@ -131,7 +131,7 @@ Index: `idx_race_regatta_boat`
 
 ### `families`
 
-Surname-based family clusters. Populated by `analysis/detect_families.py`.
+Surname-based family clusters. Populated by `packages/sailing-records/src/sailing_records/analysis/detect_families.py`.
 
 | Column | Type | Notes |
 |---|---|---|
@@ -167,7 +167,7 @@ sources are implemented, use explicit translation/source-text support.
 ### `source_text`
 
 Stores exact source-language labels or text snippets that were mapped into
-canonical fields. Created by `ingestion/sailwave_parser.py`.
+canonical fields. Created by `packages/sailing-records/src/sailing_records/ingestion/sailwave_parser.py`.
 
 | Column | Type | Notes |
 |---|---|---|
@@ -334,5 +334,5 @@ Harvester resume state.
 
 | Migration | Script | What it did |
 |---|---|---|
-| boats nullable | `schema/migrate_boats.py` | Made `yacht_scoring_boat_id` nullable |
-| participation v2 | `schema/migrate_participation_v2.py` | Made `boat_id` nullable (ICSA support) |
+| boats nullable | `packages/sailing-records/src/sailing_records/schema/migrate_boats.py` | Made `yacht_scoring_boat_id` nullable |
+| participation v2 | `packages/sailing-records/src/sailing_records/schema/migrate_participation_v2.py` | Made `boat_id` nullable (ICSA support) |

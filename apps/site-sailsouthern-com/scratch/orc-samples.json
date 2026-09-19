@@ -1,0 +1,50 @@
+[
+  {
+    "external_id": "USA-J24-001",
+    "boat_model": "J 24",
+    "owner_name": "Galveston Racer",
+    "club_name": "Galveston Bay YC",
+    "gph": 695.4,
+    "loa_m": 7.32,
+    "lwl_m": 6.10,
+    "beam_m": 2.71,
+    "draft_m": 1.22,
+    "displacement_kg": 1406,
+    "upwind_sa_m2": 24.3,
+    "downwind_sa_m2": 48.5,
+    "cert_year": 2026,
+    "source_url": "https://orc.org/sailorservices/certs/USA-J24-001"
+  },
+  {
+    "external_id": "USA-CAT30-002",
+    "boat_model": "Catalina 30",
+    "owner_name": "Bay Cruiser",
+    "club_name": "Houston Yacht Club",
+    "gph": 678.2,
+    "loa_m": 9.12,
+    "lwl_m": 7.62,
+    "beam_m": 3.30,
+    "draft_m": 1.60,
+    "displacement_kg": 4627,
+    "upwind_sa_m2": 41.3,
+    "downwind_sa_m2": 82.5,
+    "cert_year": 2026,
+    "source_url": "https://orc.org/sailorservices/certs/USA-CAT30-002"
+  },
+  {
+    "external_id": "USA-J70-003",
+    "boat_model": "J 70",
+    "owner_name": "Speedster LLC",
+    "club_name": "Southern Yacht Club",
+    "gph": 625.1,
+    "loa_m": 6.93,
+    "lwl_m": 6.24,
+    "beam_m": 2.25,
+    "draft_m": 1.45,
+    "displacement_kg": 794,
+    "upwind_sa_m2": 21.0,
+    "downwind_sa_m2": 45.6,
+    "cert_year": 2026,
+    "source_url": "https://orc.org/sailorservices/certs/USA-J70-003"
+  }
+]

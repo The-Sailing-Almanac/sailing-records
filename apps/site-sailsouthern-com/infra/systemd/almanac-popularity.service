@@ -1,0 +1,12 @@
+[Unit]
+Description=Sailing Almanac — Popularity Score Update
+After=almanac-api.service
+
+[Service]
+Type=oneshot
+User=almanac
+WorkingDirectory=/opt/sailsouthern
+EnvironmentFile=/opt/sailsouthern/.env
+ExecStart=/usr/bin/npx tsx scripts/update-popularity-scores.ts
+StandardOutput=journal
+StandardError=journal

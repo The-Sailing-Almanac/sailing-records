@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Swell wave -->
+  <path d="M2 14 Q5 9 8 14 Q11 19 14 14 Q17 9 20 14 Q21.5 16.5 22 14"/>
+  <!-- Smaller second wave below -->
+  <path d="M2 18 Q5 15 8 18 Q11 21 14 18 Q17 15 20 18 Q21.5 19.5 22 18" stroke-opacity="0.5" stroke-width="1.25"/>
+</svg>

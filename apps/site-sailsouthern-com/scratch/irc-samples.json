@@ -1,0 +1,20 @@
+[
+  {
+    "boat_model": "J 24",
+    "tcc": 0.892,
+    "cert_year": 2026,
+    "source_url": "https://ircrating.org/certs/J24-Sample"
+  },
+  {
+    "boat_model": "Catalina 30",
+    "tcc": 0.898,
+    "cert_year": 2026,
+    "source_url": "https://ircrating.org/certs/Cat30-Sample"
+  },
+  {
+    "boat_model": "J 70",
+    "tcc": 0.965,
+    "cert_year": 2026,
+    "source_url": "https://ircrating.org/certs/J70-Sample"
+  }
+]

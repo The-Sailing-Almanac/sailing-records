@@ -1,0 +1,59 @@
+{
+  "name": "sailing-almanac-root",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "workers/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=almanac-web",
+    "build:web": "npm run build --workspace=almanac-web",
+    "start:web": "npm run start --workspace=almanac-web",
+    "dev:api": "npm run dev --workspace=almanac-api",
+    "build:api": "npm run build --workspace=almanac-api",
+    "start:api": "npm run start --workspace=almanac-api",
+    "bootstrap-search": "tsx scripts/bootstrap-search.ts",
+    "index-articles": "tsx scripts/index-articles.ts",
+    "extract-domains": "tsx scripts/extract-domains.ts",
+    "score-relevance": "tsx scripts/score-relevance.ts",
+    "suppress-false-positives": "tsx scripts/suppress-false-positives.ts",
+    "assign-source-families": "tsx scripts/assign-source-families.ts",
+    "enrich-from-feeds": "tsx scripts/enrich-from-feeds.ts",
+    "enrich-relevance-gemini": "tsx scripts/enrich-relevance-gemini.ts",
+    "check-data-quality": "tsx scripts/check-data-quality.ts",
+    "daily-newsletter": "tsx scripts/generate-daily-newsletter.ts",
+    "micro-edition": "tsx scripts/generate-micro-edition.ts",
+    "update-nostr-profile": "tsx scripts/update-nostr-profile.ts",
+    "heartbeat": "tsx scripts/heartbeat.ts",
+    "migrate": "tsx scripts/apply-migration.ts",
+    "generate-redirect-hashes": "tsx scripts/generate-redirect-hashes.ts",
+    "gate-edition": "tsx scripts/gate-edition.ts",
+    "backfill-og-images": "tsx scripts/backfill-og-images.ts",
+    "update-popularity-scores": "tsx scripts/update-popularity-scores.ts",
+    "archive-seed": "tsx scripts/archive-seed.ts",
+    "secretlint": "secretlint \"**/*\"",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.2",
+    "husky": "^9.1.7",
+    "secretlint": "^13.0.2",
+    "sharp": "^0.34.5",
+    "tsx": "^4.19.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "@atproto/api": "^0.20.6",
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^16.4.5",
+    "meilisearch": "^0.37.0",
+    "pg": "^8.11.5",
+    "resend": "^6.12.4",
+    "tldts": "^6.1.30",
+    "twitter-api-v2": "^1.29.0"
+  }
+}

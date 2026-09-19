@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "lib": ["es2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@almanac/types": ["../../packages/types"],
+      "@stax/logger": ["../../packages/logger"],
+      "@stax/api-middleware": ["../../packages/api-middleware"],
+      "@stax/activity-core": ["../../packages/activity-core"],
+      "@stax/handicap-core": ["../../packages/handicap-core"],
+      "@stax/rig-db": ["../../packages/rig-db"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/__tests__/**/*", "src/**/*.test.ts"]
+}

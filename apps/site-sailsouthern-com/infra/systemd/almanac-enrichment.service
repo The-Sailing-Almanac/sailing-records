@@ -1,0 +1,17 @@
+[Unit]
+Description=Sailing Almanac Gemini Relevance Enrichment Worker
+After=network.target
+
+[Service]
+Type=simple
+User=aewoodyard
+WorkingDirectory=/home/aewoodyard/ss-sailsouthern-com
+EnvironmentFile=/home/aewoodyard/ss-sailsouthern-com/.env
+ExecStart=/usr/bin/npx tsx scripts/enrich-relevance-gemini.ts --batches=8000 --model=gemini-flash-latest --delay=5000
+Restart=on-failure
+RestartSec=30
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

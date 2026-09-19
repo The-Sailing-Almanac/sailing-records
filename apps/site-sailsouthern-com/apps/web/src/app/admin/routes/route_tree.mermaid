@@ -1,0 +1,64 @@
+flowchart TD
+    %% Classes & Styling
+    classDef approved fill:#22c55e,stroke:#15803d,color:#fff
+    classDef blocked fill:#ef4444,stroke:#b91c1c,color:#fff
+    classDef internal fill:#3b82f6,stroke:#1d4ed8,color:#fff
+    classDef system fill:#6b7280,stroke:#374151,color:#fff
+
+    root["/ (Homepage)"]:::approved
+
+    %% Paths
+    about["/about"]:::blocked
+    admin["/admin"]:::internal
+    admin_routes["/admin/routes"]:::internal
+    blog["/blog"]:::blocked
+    blog_slug["/blog/[slug]"]:::blocked
+    boats["/boats"]:::blocked
+    boats_id["/boats/[id]"]:::blocked
+    builder["/builder"]:::blocked
+    daily["/daily"]:::blocked
+    daily_latest["/daily/latest"]:::blocked
+    daily_date["/daily/[date]"]:::blocked
+    daily_section["/daily/[date]/[section]"]:::blocked
+    entities["/entities"]:::blocked
+    entities_slug["/entities/[slug]"]:::blocked
+    estimate["/handicap/estimate"]:::blocked
+    intel["/handicap/fleet-intel"]:::blocked
+    phrf["/handicap/phrf"]:::blocked
+    submit["/submit"]:::blocked
+    support["/support"]:::blocked
+    supporters["/supporters"]:::blocked
+    weekly["/weekly-edition"]:::blocked
+    weekly_date["/weekly-edition/[date]"]:::blocked
+    weekly_section["/weekly-edition/[date]/[section]"]:::blocked
+    
+    api["/api (APIs)"]:::system
+    next["/_next (Assets)"]:::system
+
+    %% Structure
+    root --> about
+    root --> admin
+    admin --> admin_routes
+    root --> blog
+    blog --> blog_slug
+    root --> boats
+    boats --> boats_id
+    root --> builder
+    root --> daily
+    daily --> daily_latest
+    daily --> daily_date
+    daily_date --> daily_section
+    root --> entities
+    entities --> entities_slug
+    root --> estimate
+    root --> intel
+    root --> phrf
+    root --> submit
+    root --> support
+    root --> supporters
+    root --> weekly
+    weekly --> weekly_date
+    weekly_date --> weekly_section
+    
+    root --> api
+    root --> next

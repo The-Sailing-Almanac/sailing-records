@@ -1,0 +1,32 @@
+version: "3"
+
+# GoToSocial — lightweight ActivityPub / Mastodon-compatible server
+# Runs at https://social.sailingalmanac.org
+# Proxied by nginx on port 8080 (internal only)
+
+services:
+  gotosocial:
+    image: superseriousbusiness/gotosocial:latest
+    container_name: gotosocial
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - /home/aewoodyard/gotosocial-data:/gotosocial/storage
+    environment:
+      GTS_HOST: social.sailingalmanac.org
+      GTS_PROTOCOL: https
+      GTS_PORT: "8080"
+      GTS_DB_TYPE: sqlite
+      GTS_DB_ADDRESS: /gotosocial/storage/sqlite.db
+      GTS_STORAGE_LOCAL_BASE_PATH: /gotosocial/storage
+      GTS_TRUSTED_PROXIES: "172.16.0.0/12,127.0.0.1/8"
+      GTS_ACCOUNTS_REGISTRATION_OPEN: "false"
+      GTS_ACCOUNTS_APPROVAL_REQUIRED: "false"
+      GTS_INSTANCE_EXPOSE_PEERS: "true"
+      GTS_INSTANCE_EXPOSE_SUSPENDED: "false"
+      GTS_MEDIA_IMAGE_MAX_SIZE: "10485760"
+      GTS_MEDIA_VIDEO_MAX_SIZE: "41943040"
+      GTS_SMTP_HOST: ""
+      GTS_SMTP_PORT: "0"
+      GTS_LETSENCRYPT_ENABLED: "false"

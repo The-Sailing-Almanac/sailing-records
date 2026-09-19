@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@almanac/types": ["../types"],
+      "@stax/logger": ["../logger"]
+    }
+  },
+  "include": ["src/**/*"]
+}

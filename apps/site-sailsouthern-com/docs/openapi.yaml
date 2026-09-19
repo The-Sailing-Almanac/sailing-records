@@ -1,0 +1,605 @@
+openapi: 3.0.0
+info:
+  title: Sailing Almanac & Sail Southern API
+  version: 1.0.0
+  description: |
+    API specifications for Sailing Almanac and Sail Southern.
+    All external client integrations MUST version endpoints under `/api/v1/...`.
+    Authentication is required for admin/management endpoints via the `X-Admin-Key` header.
+servers:
+  - url: https://api.sailingalmanac.org/api/v1
+    description: Production API Server
+  - url: http://localhost:4000/api/v1
+    description: Local Development API Server
+
+paths:
+  /status:
+    get:
+      summary: Service Status
+      description: Returns the current uptime, environment, and system statuses.
+      tags:
+        - Public
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  environment:
+                    type: string
+                    example: production
+                  uptime:
+                    type: number
+                    example: 12450.45
+
+  /ticker:
+    get:
+      summary: Active News Ticker
+      description: Returns a curated stream of active alerts, news headlines, and ticker details.
+      tags:
+        - Public
+      responses:
+        '200':
+          description: List of active ticker news items.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        url:
+                          type: string
+
+  /newsletters/latest:
+    get:
+      summary: Latest Daily Gazette
+      description: Returns the latest daily newsletter edition compile content.
+      tags:
+        - Public
+      responses:
+        '200':
+          description: Latest edition payload.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  newsletter:
+                    $ref: '#/components/schemas/NewsletterEdition'
+
+  /newsletters/archive:
+    get:
+      summary: Newsletter Archive
+      description: Returns a paginated index list of compiled past editions. Supports cursor-based pagination.
+      tags:
+        - Public
+      parameters:
+        - name: limit
+          in: query
+          description: Max items to return
+          schema:
+            type: integer
+            default: 20
+        - name: cursor
+          in: query
+          description: Cursor token for pagination
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of archived newsletters.
+
+  /newsletters/{date}:
+    get:
+      summary: Fetch Newsletter by Date
+      description: Retrieve a specific edition compiled on YYYY-MM-DD.
+      tags:
+        - Public
+      parameters:
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Archived newsletter edition found.
+        '404':
+          description: Edition not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /search:
+    get:
+      summary: Search Articles
+      description: Query indexed article links and editorial snippets.
+      tags:
+        - Public
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Search results from index.
+
+  /boats:
+    get:
+      summary: Boat Specification Directory
+      description: Paginated query listing of sailboat models and aggregated dimensions.
+      tags:
+        - Public
+      parameters:
+        - name: builder
+          in: query
+          schema:
+            type: string
+        - name: model
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: List of matched boats.
+
+  /boats/{id}:
+    get:
+      summary: Boat spec details
+      description: Retrieve Pivoted specification dimensions, confidence metrics, and vote audits for a boat.
+      tags:
+        - Public
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Boat consensus record.
+
+  /boats/{id}/vote:
+    post:
+      summary: Submit Specs Vote
+      description: Vote thumbs up or flag to report correction needs on a consensus profile.
+      tags:
+        - Public
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vote_type
+              properties:
+                vote_type:
+                  type: string
+                  enum: [up, flag]
+      responses:
+        '200':
+          description: Vote counted successfully.
+
+  /handicap/phrf/regions:
+    get:
+      summary: List PHRF Regions
+      description: List PHRF rating authority regions (e.g. Galveston Bay, Chesapeake, SoCal).
+      tags:
+        - Public
+      responses:
+        '200':
+          description: Array of regions.
+
+  /handicap/phrf/ratings:
+    get:
+      summary: List PHRF Boat Ratings
+      description: Paginated list of baseline PHRF offsets for registered boat models.
+      tags:
+        - Public
+      responses:
+        '200':
+          description: List of ratings.
+
+  /handicap/phrf/compare:
+    post:
+      summary: Compare Regional Ratings
+      description: Compute corrected allowances and offset differences across multiple PHRF regional authorities.
+      tags:
+        - Public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - boat_id
+                - regions
+              properties:
+                boat_id:
+                  type: integer
+                regions:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Ratings comparison dataset.
+
+  /handicap/estimate:
+    post:
+      summary: Cross-System Estimator
+      description: Project PHRF base ratings to estimate ORC Sailor Services GPH and IRC TCC bands.
+      tags:
+        - Public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phrf_rating
+              properties:
+                phrf_rating:
+                  type: integer
+      responses:
+        '200':
+          description: Rating estimates.
+
+  /handicap/fleet-intel:
+    post:
+      summary: Fleet Performance Advisor
+      description: Evaluate sail-area/displacement (SA/D) and displacement/length (D/L) aggregates for boat list.
+      tags:
+        - Public
+      responses:
+        '200':
+          description: Performance advice dataset.
+
+  /handicap/reports:
+    get:
+      summary: AI Insights Reports
+      description: List compiled statistical reports and AI critiques on regional handicapping.
+      tags:
+        - Public
+      responses:
+        '200':
+          description: Reports list.
+
+  /submissions:
+    post:
+      summary: Submit User Contributions
+      description: Submit photos, stories, rig corrections, or links (rate-limited).
+      tags:
+        - Public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - submission_type
+                - submitter_email
+                - content_payload
+                - rights_grant
+              properties:
+                submission_type:
+                  type: string
+                  enum: [photo, story, rig_correction, owner_group]
+                boat_id:
+                  type: integer
+                submitter_email:
+                  type: string
+                  format: email
+                content_payload:
+                  type: object
+                rights_grant:
+                  type: string
+      responses:
+        '200':
+          description: Submission stored successfully.
+
+  /subscribe:
+    post:
+      summary: Email Newsletter Subscribe
+      tags:
+        - Public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: Subscription confirmation email queued.
+
+  /admin/stats:
+    get:
+      summary: System Admin Dashboard Metrics
+      security:
+        - AdminApiKey: []
+      tags:
+        - Admin
+      responses:
+        '200':
+          description: Admin system diagnostics payload.
+
+  /social/posts:
+    get:
+      summary: List Archived Outbound Posts
+      description: Returns a paginated index of outbound social posts, filtered by platform, account, timeframe, or entity.
+      security:
+        - AdminApiKey: []
+      tags:
+        - Admin
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: cursor
+          in: query
+          schema:
+            type: string
+        - name: platform
+          in: query
+          schema:
+            type: string
+        - name: accountId
+          in: query
+          schema:
+            type: integer
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: entityType
+          in: query
+          schema:
+            type: string
+        - name: entityId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of social posts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  posts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SocialPost'
+                  next_cursor:
+                    type: string
+                    nullable: true
+                  has_next_page:
+                    type: boolean
+
+  /social/posts/{id}:
+    get:
+      summary: Fetch Archived Post Details
+      description: Retrieve details for a single social post, including delivery statuses, links, media, and captures.
+      security:
+        - AdminApiKey: []
+      tags:
+        - Admin
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detailed social post payload.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    $ref: '#/components/schemas/SocialPost'
+                  deliveries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SocialPostDelivery'
+                  media:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SocialPostMedia'
+                  links:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SocialPostLink'
+                  captures:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SocialPostCapture'
+
+components:
+  securitySchemes:
+    AdminApiKey:
+      type: apiKey
+      name: X-Admin-Key
+      in: header
+
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+              example: VALIDATION_ERROR
+            message:
+              type: string
+              example: Invalid email address
+            details:
+              type: array
+              items:
+                type: object
+              nullable: true
+
+    NewsletterEdition:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content_md:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    SocialPost:
+      type: object
+      properties:
+        id:
+          type: integer
+        content_text:
+          type: string
+        title:
+          type: string
+          nullable: true
+        linked_entity_type:
+          type: string
+          nullable: true
+        linked_entity_id:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+        provenance_rights:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+
+    SocialPostDelivery:
+      type: object
+      properties:
+        id:
+          type: integer
+        post_id:
+          type: integer
+        account_id:
+          type: integer
+          nullable: true
+        platform:
+          type: string
+        external_id:
+          type: string
+          nullable: true
+        external_url:
+          type: string
+          nullable: true
+        status:
+          type: string
+        error_message:
+          type: string
+          nullable: true
+        delivered_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    SocialPostMedia:
+      type: object
+      properties:
+        id:
+          type: integer
+        post_id:
+          type: integer
+        media_url:
+          type: string
+        media_type:
+          type: string
+        alt_text:
+          type: string
+          nullable: true
+
+    SocialPostLink:
+      type: object
+      properties:
+        id:
+          type: integer
+        post_id:
+          type: integer
+        url:
+          type: string
+        short_url:
+          type: string
+          nullable: true
+
+    SocialPostCapture:
+      type: object
+      properties:
+        id:
+          type: integer
+        post_id:
+          type: integer
+        delivery_id:
+          type: integer
+        capture_type:
+          type: string
+        archive_url:
+          type: string
+        captured_at:
+          type: string
+          format: date-time

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Helm circle -->
+  <circle cx="12" cy="12" r="8"/>
+  <!-- Center hub -->
+  <circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none"/>
+  <!-- 6 spokes -->
+  <line x1="12" y1="4" x2="12" y2="9.5"/>
+  <line x1="12" y1="14.5" x2="12" y2="20"/>
+  <line x1="4" y1="12" x2="9.5" y2="12"/>
+  <line x1="14.5" y1="12" x2="20" y2="12"/>
+  <line x1="6.34" y1="6.34" x2="10.23" y2="10.23"/>
+  <line x1="13.77" y1="13.77" x2="17.66" y2="17.66"/>
+  <line x1="17.66" y1="6.34" x2="13.77" y2="10.23"/>
+  <line x1="10.23" y1="13.77" x2="6.34" y2="17.66"/>
+</svg>

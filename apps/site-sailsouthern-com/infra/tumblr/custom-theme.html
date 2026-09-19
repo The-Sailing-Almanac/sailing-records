@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
+  {block:Description}
+  <meta name="description" content="{MetaDescription}">
+  {/block:Description}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: hsl(220, 20%, 8%);
+      --bg-secondary: hsla(220, 20%, 12%, 0.7);
+      --border-color: hsla(220, 20%, 20%, 0.5);
+      --text-primary: hsl(220, 10%, 96%);
+      --text-secondary: hsl(220, 10%, 75%);
+      --text-muted: hsl(220, 10%, 55%);
+      --primary: hsl(200, 100%, 50%);
+      --primary-glow: hsla(200, 100%, 50%, 0.15);
+      --accent: hsl(150, 100%, 40%);
+      --radius-lg: 16px;
+      --radius-md: 8px;
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --font-heading: 'Outfit', sans-serif;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      background-image: 
+        radial-gradient(at 0% 0%, hsla(200, 100%, 50%, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(150, 100%, 40%, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    header {
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(8, 10, 12, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      margin-bottom: 50px;
+    }
+
+    header .logo-container {
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    header h1 {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 30%, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .posts {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .post {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .post:hover {
+      transform: translateY(-4px);
+      border-color: hsla(200, 100%, 50%, 0.3);
+      box-shadow: 0 12px 40px 0 hsla(200, 100%, 50%, 0.1);
+    }
+
+    /* Post elements styling */
+    .post h2.title {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .post h2.title a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .post h2.title a:hover {
+      color: var(--primary);
+    }
+
+    .post-content {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .post-content p {
+      margin-bottom: 16px;
+    }
+
+    .post-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-md);
+      margin: 12px 0 20px 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .post-footer {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .post-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .post-footer a:hover {
+      color: var(--primary);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tags a {
+      background: var(--border-color);
+      color: var(--text-secondary);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .tags a:hover {
+      background: var(--primary);
+      color: var(--bg-primary);
+    }
+
+    /* Pagination */
+    .pagination {
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .pagination a {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 10px 20px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .pagination a:hover {
+      background: var(--primary-glow);
+      border-color: var(--primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header {
+        padding: 40px 16px;
+      }
+      header h1 {
+        font-size: 28px;
+      }
+      .post {
+        padding: 24px;
+      }
+      .post h2.title {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      {block:ShowAvatar}
+      <div class="logo-container">
+        <img src="{PortraitURL-96}" alt="Avatar" style="border-radius: 50%; border: 2px solid var(--primary); width: 64px; height: 64px;">
+      </div>
+      {/block:ShowAvatar}
+      <h1>{Title}</h1>
+      {block:Description}
+      <p>{Description}</p>
+      {/block:Description}
+    </div>
+  </header>
+
+  <div class="container">
+    <main class="posts">
+      {block:Posts}
+        <article class="post">
+          
+          <!-- Text Post -->
+          {block:Text}
+            {block:Title}
+              <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+            {/block:Title}
+            <div class="post-content">
+              {Body}
+            </div>
+          {/block:Text}
+
+          <!-- Photo Post -->
+          {block:Photo}
+            <div class="post-content">
+              <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+              {block:Caption}
+                <div class="caption">{Caption}</div>
+              {/block:block:Caption}
+            </div>
+          {/block:Photo}
+
+          <!-- Link Post -->
+          {block:Link}
+            <h2 class="title"><a href="{URL}" {Target}>{Name}</a></h2>
+            <div class="post-content">
+              {block:Description}
+                <div class="description">{Description}</div>
+              {/block:Description}
+            </div>
+          {/block:Link}
+
+          <!-- Footer Metadata -->
+          <footer class="post-footer">
+            <div>
+              {block:Date}
+                <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</a>
+              {/block:Date}
+            </div>
+            <div>
+              {block:NoteCount}
+                <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+              {/block:NoteCount}
+            </div>
+          </footer>
+
+          <!-- Tags -->
+          {block:HasTags}
+            <div class="tags">
+              {block:Tags}
+                <a href="{TagURL}">#{Tag}</a>
+              {/block:Tags}
+            </div>
+          {/block:HasTags}
+
+        </article>
+      {/block:Posts}
+    </main>
+
+    <!-- Pagination -->
+    {block:Pagination}
+      <nav class="pagination">
+        {block:PreviousPage}
+          <a href="{PreviousPage}">&#8592; Previous</a>
+        {/block:PreviousPage}
+        <span style="color: var(--text-muted); font-size: 14px;">Page {CurrentPage} of {TotalPages}</span>
+        {block:NextPage}
+          <a href="{NextPage}">Next &#8594;</a>
+        {/block:NextPage}
+      </nav>
+    {/block:Pagination}
+  </div>
+
+</body>
+</html>

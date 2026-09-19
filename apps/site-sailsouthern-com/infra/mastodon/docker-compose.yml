@@ -1,0 +1,106 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14-alpine
+    shm_size: 256mb
+    networks:
+      - external_network
+      - internal_network
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres']
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=mastodon_production
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secure_postgres_pass_change_me
+    restart: always
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - internal_network
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+    volumes:
+      - redis_data:/data
+    restart: always
+
+  web:
+    image: tootsuite/mastodon:v4.2.8
+    image_policy:
+      pull: always
+    networks:
+      - external_network
+      - internal_network
+    env_file: .env.production
+    ports:
+      - '127.0.0.1:3000:3000'
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - public_system:/mastodon/public/system
+    command: bash -c "rm -f /mastodon/tmp/pids/server.pid && bundle exec rails s -p 3000"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+        reservations:
+          memory: 512M
+
+  sidekiq:
+    image: tootsuite/mastodon:v4.2.8
+    image_policy:
+      pull: always
+    networks:
+      - external_network
+      - internal_network
+    env_file: .env.production
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - public_system:/mastodon/public/system
+    command: bundle exec sidekiq
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+        reservations:
+          memory: 512M
+
+  streaming:
+    image: tootsuite/mastodon:v4.2.8
+    image_policy:
+      pull: always
+    networks:
+      - external_network
+      - internal_network
+    env_file: .env.production
+    ports:
+      - '127.0.0.1:4000:4000'
+    depends_on:
+      - db
+      - redis
+    command: node ./streaming
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+
+networks:
+  external_network:
+  internal_network:
+    internal: true
+
+volumes:
+  db_data:
+  redis_data:
+  public_system:

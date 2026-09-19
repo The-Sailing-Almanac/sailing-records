@@ -1,0 +1,20 @@
+[Unit]
+Description=Sailing Almanac Web Frontend (Next.js)
+After=network.target almanac-api.service
+
+[Service]
+Type=simple
+User=aewoodyard
+WorkingDirectory=/home/aewoodyard/ss-sailsouthern-com/apps/web
+EnvironmentFile=/home/aewoodyard/ss-sailsouthern-com/.env
+Environment=NEXT_PUBLIC_API_URL=https://api.sailsouthern.com
+Environment=PORT=3002
+Environment=NODE_ENV=production
+ExecStart=/home/aewoodyard/ss-sailsouthern-com/node_modules/.bin/next start -p 3002
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

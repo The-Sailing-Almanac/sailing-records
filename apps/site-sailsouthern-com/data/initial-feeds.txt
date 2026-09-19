@@ -1,0 +1,39 @@
+# Sailing Almanac — Initial RSS Feed Seed List
+# Format: one URL per line. Lines starting with # are ignored.
+# Add more feeds here and re-run: npx tsx scripts/seed-feeds.ts ./data/initial-feeds.txt
+
+# ── NEWS & GENERAL SAILING ──────────────────────────────────────────────────
+https://www.sailingscuttlebutt.com/feed/
+https://www.yachtingworld.com/feed
+https://www.sailingworld.com/feed
+https://www.cruisingworld.com/feed
+https://www.practical-sailor.com/feed/
+https://oceannavigator.com/feed/
+https://www.sailing.org/news/rss.php
+https://www.48northsailing.com/feed/
+https://www.thesailingpodcast.com/feed/podcast/
+https://www.latitudeandlongitude.com/feed/
+
+# ── RACING ──────────────────────────────────────────────────────────────────
+https://www.americascup.com/en/news.rss
+https://www.sailing.org/news/rss.php
+https://www.sportanddev.org/sites/default/files/feeds/sailing.rss
+https://www.sailinganarchy.com/feed/
+https://rss.cbssports.com/rss/headlines/sport/sailing
+
+# ── CRUISING & VOYAGING ─────────────────────────────────────────────────────
+https://www.cruisersforum.com/forums/-/index.rss
+https://www.noonsite.com/feed/
+https://www.passage-maker.com/feed/
+https://bluewatercruising.org/feed/
+
+# ── GEAR & TECHNOLOGY ───────────────────────────────────────────────────────
+https://www.sailmagazine.com/feed/
+https://www.boatingmag.com/feed/
+
+# ── PODCASTS ────────────────────────────────────────────────────────────────
+https://goodjibepodcast.libsyn.com/rss
+https://thedownwindleg.libsyn.com/rss
+https://compassrose.libsyn.com/rss
+https://podcast.cruisersforum.com/feed.xml
+https://www.thesailingpodcast.com/feed/podcast/

@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY workers/ingest/package.json ./workers/ingest/
+
+RUN npm install --workspace=@sailsouthern/ingest-worker --omit=dev
+
+COPY workers/ingest/dist ./workers/ingest/dist
+
+WORKDIR /app/workers/ingest
+
+CMD ["node", "dist/feed-validator-main.js"]

@@ -1,0 +1,104 @@
+version: '3.8'
+
+services:
+  almanac-db:
+    image: postgres:16-alpine
+    container_name: almanac-db
+    restart: unless-stopped
+    mem_limit: 2g
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    environment:
+      POSTGRES_USER: almanac_user
+      POSTGRES_PASSWORD: almanac_password
+      POSTGRES_DB: almanac_db
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U almanac_user -d almanac_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  almanac-redis:
+    image: redis:7-alpine
+    container_name: almanac-redis
+    restart: unless-stopped
+    mem_limit: 256m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  almanac-search:
+    image: getmeili/meilisearch:v1.6
+    container_name: almanac-search
+    restart: unless-stopped
+    mem_limit: 1g
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    ports:
+      - "7700:7700"
+    env_file:
+      - ../../.env
+    environment:
+      - MEILI_ENV=production
+      - MEILI_HTTP_ADDR=0.0.0.0:7700
+    volumes:
+      - search_data:/meili_data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:7700/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  almanac-feed-validator:
+    build:
+      context: ../..
+      dockerfile: workers/ingest/Dockerfile.feed-validator
+    container_name: almanac-feed-validator
+    restart: unless-stopped
+    mem_limit: 256m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    env_file:
+      - ../../.env
+    environment:
+      - DATABASE_URL=postgresql://almanac_user:almanac_password@almanac-db:5432/almanac_db
+      - REDIS_HOST=almanac-redis
+      - REDIS_PORT=6379
+    depends_on:
+      - almanac-db
+      - almanac-redis
+    healthcheck:
+      test: ["CMD-SHELL", "ps aux | grep node || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  db_data:
+  redis_data:
+  search_data:

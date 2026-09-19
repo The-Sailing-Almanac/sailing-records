@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Flagpole -->
+  <line x1="6" y1="3" x2="6" y2="21"/>
+  <!-- Flag -->
+  <path d="M6 4 L19 8 L6 13 Z" fill="currentColor" stroke="none" opacity="0.85"/>
+</svg>

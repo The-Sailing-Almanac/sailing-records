@@ -1,0 +1,29 @@
+{
+  "name": "@sailsouthern/ingest-worker",
+  "version": "1.0.0",
+  "description": "Feed poller and ingestion worker for Sailing Almanac",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@almanac/types": "*",
+    "@aws-sdk/client-s3": "^3.1055.0",
+    "@google/generative-ai": "^0.11.1",
+    "bullmq": "^5.7.8",
+    "cheerio": "^1.2.0",
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1",
+    "pg": "^8.11.5",
+    "resend": "^6.12.4",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/pg": "^8.11.6",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5"
+  }
+}

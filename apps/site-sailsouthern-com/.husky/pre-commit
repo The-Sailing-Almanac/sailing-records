@@ -1,0 +1,4 @@
+npm run secretlint
+npx tsc --noEmit --project apps/api/tsconfig.json
+npx tsc --noEmit --project apps/web/tsconfig.json
+npx tsc --noEmit --project workers/ingest/tsconfig.json

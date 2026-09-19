@@ -1,0 +1,17 @@
+[Unit]
+Description=Sailing Almanac Ingest Worker Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=aewoodyard
+WorkingDirectory=/home/aewoodyard/ss-sailsouthern-com/workers/ingest
+EnvironmentFile=/home/aewoodyard/ss-sailsouthern-com/.env
+ExecStart=/usr/bin/node dist/index.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

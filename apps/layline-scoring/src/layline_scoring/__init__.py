@@ -16,6 +16,7 @@ from layline_scoring.orc import (
     round_seconds,
 )
 from layline_scoring.sailwave import export_race_to_sailwave_csv
+from layline_scoring.db import init_trophy_db, record_race_results
 
 __all__ = [
     "__version__",
@@ -32,4 +33,6 @@ __all__ = [
     "calculate_orc_triple_number",
     "round_seconds",
     "export_race_to_sailwave_csv",
+    "init_trophy_db",
+    "record_race_results",
 ]
